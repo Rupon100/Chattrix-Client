@@ -5,11 +5,11 @@ import { IoNotifications } from "react-icons/io5";
 import useAuth from "../../Hooks/useAuth";
 
 const Navbar = () => {
-  const { user,  logOut } = useAuth();
+  const { user, logOut } = useAuth();
 
   const handleLogout = () => {
     logOut();
-  }
+  };
 
   const links = (
     <>
@@ -25,18 +25,12 @@ const Navbar = () => {
           <h3>Membership</h3>
         </Link>
       </li>
-      {
-        user && <li>
-        <Link to={`/dashboard`} className="nav">Dashboard</Link>
-      </li>
-      }
       <li>
         <Link className="nav ">
           <IoNotifications />
           <div className="badge bg-gray-500 text-white">+0</div>
         </Link>
       </li>
-     
     </>
   );
 
@@ -54,54 +48,43 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
+
         <div className="navbar-end">
-
-          {
-            user?.email 
-            ? 
-         
-
-          <div className="dropdown dropdown-end">
-
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-12 rounded-full">
-                <img
-                  alt="profile"
-                  src={user?.photoURL}
-                />
+          {user?.email ? (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-12 rounded-full">
+                  <img alt="profile" src={user?.photoURL} />
+                </div>
               </div>
+
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow text-center text-white bg-sky-950 flex flex-col justify-center "
+              >
+                <li className="text-center font-semibold text-lg">
+                  {user?.displayName}
+                </li>
+                <li>
+                  <Link to={`/dashboard`}>Dashboard</Link>
+                </li>
+                <li onClick={handleLogout}>
+                  <a>Logout</a>
+                </li>
+              </ul>
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow text-center text-white bg-sky-950 flex flex-col justify-center "
+          ) : (
+            <Link
+              to={`/joinus`}
+              className="flex border rounded-lg items-center gap-2 px-4 py-2  bg-transparent text-white hover:bg-sky-700 no-underline"
             >
-              <li className="text-center font-semibold text-lg" >{user?.displayName}</li>
-              <li>
-                <Link>Dashboard</Link>
-              </li>
-              <li onClick={handleLogout} >
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
-
-          : 
-
-
-
-          
-          <Link
-          to={`/joinus`}
-          className="flex border rounded-lg items-center gap-2 px-4 py-2  bg-transparent text-white hover:bg-sky-700 no-underline"
-          >
-            Join Us
-          </Link>
-
-          }
+              Join Us
+            </Link>
+          )}
 
           <div className="dropdown dropdown-end lg:hidden">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
