@@ -1,17 +1,36 @@
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import useAuth from "../Hooks/useAuth";
 
 const Register = () => {
+
+  const { createUser, updateUserProfile, googleSignin } = useAuth();
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     console.log("Form Data: ", data);
+
+    createUser(data?.email, data?.password)
+    .then(res => {
+      updateUserProfile(data?.username, '')
+      .then(() => {
+        reset();
+      })
+      console.log(res?.user)
+    })
   };
+
+
+  const handleGoogleLogin = () => {
+    googleSignin();
+  }
 
   return (
     <div className="max-w-sm mx-auto mt-10 p-5 bg-white rounded-md">
@@ -73,6 +92,10 @@ const Register = () => {
                 value: 6,
                 message: "Password must be at least 6 characters",
               },
+              pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/,
+                message: "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+              },
             })}
           />
           {errors.password && (
@@ -94,7 +117,7 @@ const Register = () => {
 
         <div className="divider"></div>
 
-        <button className="flex items-center gap-2 border self-center p-2 rounded-lg hover:bg-gray-200 transition-all">
+        <button onClick={handleGoogleLogin} type="button" className="flex items-center gap-2 border self-center p-2 rounded-lg hover:bg-gray-200 transition-all">
           <FcGoogle /> <h3>Join With Google</h3>{" "}
         </button>
       </form>

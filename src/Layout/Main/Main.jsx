@@ -7,8 +7,7 @@ const Main = () => {
     <div >
       <Navbar ></Navbar>
       {/* dynamic now */}
-      {/* className="" */}
-      <div className="max-w-6xl mx-auto min-h-[calc(100vh-64px)]" >
+      <div className="min-h-[calc(100vh-64px)]" >
         <Outlet></Outlet>
       </div>
       <Footer className="max-w-6xl mx-auto" ></Footer>

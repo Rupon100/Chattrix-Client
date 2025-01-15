@@ -1,16 +1,38 @@
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
+import useAuth from "../Hooks/useAuth";
+import { useState } from "react";
 
 const Joinus = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+  const { signUser, googleSignin } = useAuth();
+  const [loginError, setLoginError] = useState("");
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
 
     const onSubmit = (data) => {
-        console.log("Form Data: ", data);
+      console.log(data.email);
+        signUser(data.email, data.password)
+        .then(res => {
+          console.log('From Login: ', res);
+          reset();
+        })
+        .catch(err => {
+          setLoginError("Invalid email or password. Please try again.")
+        })
       };
     
+    const handleGoogleLogin = () => {
+      setLoginError("");
+      googleSignin()
+      .then(() => {
+        console.log('google login!');
+      })
+      .catch(err => {
+        setLoginError("Google Sign-In failed. Please try again.");
+      })
+    }
 
   return (
     <div className="max-w-sm mx-auto mt-10 p-5 " >
@@ -61,9 +83,13 @@ const Joinus = () => {
           <button type={"submit"} className="w-full p-2 rounded-lg bg-sky-800 hover:bg-sky-900 text-white">Login</button>
         </div>
 
+        {loginError && (
+          <p className="text-red-500 text-xs mt-3 text-center">{loginError}</p>
+        )}
+
         <div className="divider" ></div>
 
-       <button className="flex items-center gap-2 border self-center p-2 rounded-lg hover:bg-gray-200 transition-all" ><FcGoogle /> <h3>Join With Google</h3> </button>
+       <button onClick={handleGoogleLogin} type="button" className="flex items-center gap-2 border self-center p-2 rounded-lg hover:bg-gray-200 transition-all" ><FcGoogle /> <h3>Join With Google</h3> </button>
 
       </form>
 
