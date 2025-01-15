@@ -5,6 +5,11 @@ import Joinus from "../Pages/Joinus";
 import Register from "../Pages/Register";
 import Error from "../Components/ErrorElement/Error";
 import Home from "../Layout/Home/Home";
+import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../Layout/Dashboard/Dashboard";
+import MyPost from "../UserDash/MyPost";
+import MyProfile from "../UserDash/MyProfile";
+import AddPost from "../UserDash/AddPost";
 
 const Router = createBrowserRouter([
     {
@@ -23,6 +28,24 @@ const Router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        children: [
+            {
+                path: 'profile',
+                element: <PrivateRoute><MyProfile></MyProfile></PrivateRoute>
+            },
+            {
+                path: 'addpost',
+                element: <PrivateRoute><AddPost></AddPost></PrivateRoute>
+            },
+            {
+                path: 'mypost',
+                element: <PrivateRoute><MyPost></MyPost></PrivateRoute>
             }
         ]
     }

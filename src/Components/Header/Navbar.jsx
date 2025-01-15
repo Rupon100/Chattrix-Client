@@ -25,12 +25,18 @@ const Navbar = () => {
           <h3>Membership</h3>
         </Link>
       </li>
+      {
+        user && <li>
+        <Link to={`/dashboard`} className="nav">Dashboard</Link>
+      </li>
+      }
       <li>
         <Link className="nav ">
           <IoNotifications />
           <div className="badge bg-gray-500 text-white">+0</div>
         </Link>
       </li>
+     
     </>
   );
 
