@@ -5,7 +5,9 @@ import { IoNotifications } from "react-icons/io5";
 import useAuth from "../../Hooks/useAuth";
 
 const Navbar = () => {
-  const { user, logOut } = useAuth();
+  const { user, loading, logOut } = useAuth();
+
+  console.log(user);
 
   const handleLogout = () => {
     logOut();
@@ -50,7 +52,11 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end">
-          {user?.email ? (
+          {loading ? (
+            <div>
+              <span className="loading loading-spinner loading-lg"></span>
+            </div>
+          ) : user?.email ? (
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
@@ -58,7 +64,7 @@ const Navbar = () => {
                 className="btn btn-ghost btn-circle avatar"
               >
                 <div className="w-12 rounded-full">
-                  <img alt="profile" src={user?.photoURL} />
+                  <img alt="profile" src={user?.photoURL } />
                 </div>
               </div>
 
@@ -67,10 +73,10 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow text-center text-white bg-sky-950 flex flex-col justify-center "
               >
                 <li className="text-center font-semibold text-lg">
-                  {user?.displayName}
+                  {user?.displayName || 'User'}
                 </li>
                 <li>
-                  <Link to={`/dashboard`}>Dashboard</Link>
+                  <Link to={`/dashboard/profile`}>Dashboard</Link>
                 </li>
                 <li onClick={handleLogout}>
                   <a>Logout</a>

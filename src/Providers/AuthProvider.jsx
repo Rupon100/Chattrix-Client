@@ -49,11 +49,10 @@ const AuthProvider = ({children}) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
-          
+        //   setLoading(true)
            
             console.log("current user: ", currentUser);
-            // setLoading(false)
-            // setUser(currentUser)
+            
             if(currentUser){
                 // get token and store client
                 const userInfo = {email: currentUser?.email};
@@ -82,7 +81,7 @@ const AuthProvider = ({children}) => {
             return unsubscribe();
         }
 
-    }, [])
+    }, [axiosPublic])
 
     const authInfo = {
         user,

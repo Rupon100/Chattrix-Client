@@ -16,8 +16,8 @@ createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
 
-      <RouterProvider router={Router}>
         <Toaster />
+      <RouterProvider router={Router}>
       </RouterProvider>
       </AuthProvider>
     </QueryClientProvider>
