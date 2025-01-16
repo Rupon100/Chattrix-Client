@@ -1,13 +1,22 @@
+import useAuth from "../Hooks/useAuth";
+import bronzeImg from '../assets/bronze.png'
+
 const MyProfile = () => {
+  const { user } = useAuth();
   return (
-    <div>
-      This page will have the user's name, image, email, badges, and my 3 recent
-      posts (show necessary information). There will be two badges and these
-      badges will be visible only on the My Profile page when the conditions are
-      fulfilled: Bronze Badge: If a user registers on the site, he/ she will
-      receive the Bronze badge. Or, Gold Badge: If a user becomes a member (see
-      req 7), he/ she will be rewarded the Gold badge. Note: You can use a
-      picture/icon for the badge. It is up to you. Keep it relevant.
+    <div className="p-4 md:p-8 flex flex-col justify-center items-center" >
+      <div className="text-center flex flex-col items-center gap-2 md:gap-4">
+        <h2 className="text-2xl font-semibold">{user?.displayName}</h2>
+        <h3 className="text-xl font-semibold">{user?.email}</h3>
+        <img className="w-28 rounded-lg" src={user?.photoURL} alt="" />
+        <div className="flex items-center flex-col" >
+          <img src={bronzeImg} alt="" />
+           after payment Gold
+        </div>
+      </div>
+      <div>
+        3 recent post here base on date
+      </div>
     </div>
   );
 };

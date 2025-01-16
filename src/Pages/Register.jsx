@@ -2,10 +2,14 @@ import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_API;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Register = () => {
-
   const { createUser, updateUserProfile, googleSignin } = useAuth();
+  const axiosPublic = useAxiosPublic();
 
   const {
     register,
@@ -14,29 +18,41 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("Form Data: ", data);
 
-    createUser(data?.email, data?.password)
-    .then(res => {
-      updateUserProfile(data?.username, '')
-      .then(() => {
-        reset();
-      })
-      console.log(res?.user)
-    })
-  };
+    const img = { image: data.image[0] };
+    const res = await axiosPublic.post(image_hosting_api, img, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
 
+
+
+    if(res.data.success){
+      const photoURL = res?.data?.data?.display_url
+      ;
+      
+      createUser(data?.email, data?.password).then((res) => {
+        updateUserProfile(data?.username, photoURL).then(() => {
+          reset();
+        });
+        console.log(res?.user);
+      });
+
+    }
+  };
 
   const handleGoogleLogin = () => {
     googleSignin();
-  }
+  };
 
   return (
     <div className="max-w-sm mx-auto mt-10 p-5 bg-white rounded-md">
       <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col" >
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
         {/* usernaem */}
         <div className="mb-4">
           <label htmlFor="username" className="block text-sm font-semibold">
@@ -77,6 +93,25 @@ const Register = () => {
           )}
         </div>
 
+        {/* choose an image */}
+        <div className="mb-4">
+          <label htmlFor="image" className="block text-sm font-semibold">
+            photoURL
+          </label>
+          <input
+            id="image"
+            type="file"
+            className="file-input file-input-bordered text-sm w-full "
+            accept="image/*"
+            {...register("image", {
+              required: "Please upload an image",
+            })}
+          />
+          {errors.image && (
+            <p className="text-red-500 text-xs mt-1">{errors.image.message}</p>
+          )}
+        </div>
+
         {/* Password */}
         <div className="mb-4">
           <label htmlFor="password" className="block text-sm font-semibold">
@@ -94,7 +129,8 @@ const Register = () => {
               },
               pattern: {
                 value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/,
-                message: "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+                message:
+                  "Password must contain at least one uppercase letter, one lowercase letter, and one number",
               },
             })}
           />
@@ -117,14 +153,18 @@ const Register = () => {
 
         <div className="divider"></div>
 
-        <button onClick={handleGoogleLogin} type="button" className="flex items-center gap-2 border self-center p-2 rounded-lg hover:bg-gray-200 transition-all">
+        <button
+          onClick={handleGoogleLogin}
+          type="button"
+          className="flex items-center gap-2 border self-center p-2 rounded-lg hover:bg-gray-200 transition-all"
+        >
           <FcGoogle /> <h3>Join With Google</h3>{" "}
         </button>
       </form>
 
       <h3 className="text-center my-4 text-sm">
         Already have an Account?{" "}
-        <Link to={`/joinus`} className="font-semibold ">
+        <Link to={`/login`} className="font-semibold ">
           Login.
         </Link>
       </h3>

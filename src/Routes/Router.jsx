@@ -22,7 +22,7 @@ const Router = createBrowserRouter([
                 element: <Home></Home>
             },
             {
-                path: '/joinus',
+                path: '/login',
                 element: <Joinus></Joinus>
             },
             {

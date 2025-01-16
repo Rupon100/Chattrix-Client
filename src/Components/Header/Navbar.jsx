@@ -16,7 +16,7 @@ const Navbar = () => {
       <li>
         <Link className="nav">
           <FaHome />
-          <h2> Home</h2>
+          <h2>Home</h2>
         </Link>
       </li>
       <li>
@@ -79,7 +79,7 @@ const Navbar = () => {
             </div>
           ) : (
             <Link
-              to={`/joinus`}
+              to={`/login`}
               className="flex border rounded-lg items-center gap-2 px-4 py-2  bg-transparent text-white hover:bg-sky-700 no-underline"
             >
               Join Us
