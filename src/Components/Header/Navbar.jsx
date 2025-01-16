@@ -22,7 +22,7 @@ const Navbar = () => {
         </Link>
       </li>
       <li>
-        <Link className="nav ">
+        <Link to={`/member`} className="nav ">
           <MdCardMembership />
           <h3>Membership</h3>
         </Link>
