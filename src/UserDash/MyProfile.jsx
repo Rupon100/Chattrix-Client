@@ -1,12 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
 import useAuth from "../Hooks/useAuth";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import bronzeImg from "../assets/bronze.png";
+import goldImg from "../assets/gold.png";
 import usePosts from "../Hooks/userPosts";
+import useUsers from "../Hooks/useUsers";
 
 const MyProfile = () => {
   const { user } = useAuth();
-
+  const [users] = useUsers();
   const [posts] = usePosts();
 
   const recentPosts = posts
@@ -18,18 +18,30 @@ const MyProfile = () => {
       <div className="text-center flex flex-col items-center gap-2 md:gap-4 space-y-3">
         <h3 className="text-xl font-semibold">{user?.email}</h3>
         <div>
-
-        <img className="w-28 rounded-lg" src={user?.photoURL} alt="" />
-        <h2 className="text-2xl font-semibold">{user?.displayName}</h2>
+          <img className="w-28 rounded-lg" src={user?.photoURL} alt="" />
+          <h2 className="text-2xl font-semibold">{user?.displayName}</h2>
         </div>
         <div className="flex items-center flex-col font-bold">
-          <img src={bronzeImg} alt="" />
-          Bronze
+          {users?.badge === "bronze" && (
+            <div>
+              <img src={bronzeImg} alt="Bronze Badge" />
+              Bronze
+            </div>
+          )}
+          {users?.badge === "gold" && (
+            <div>
+              <img src={goldImg} alt="Gold Badge" />
+              Gold
+            </div>
+          )}
         </div>
       </div>
       <div className="text-white grid gap-4 grid-cols-1 md:grid-cols-3">
         {recentPosts.map((post) => (
-          <div key={post._id} className="p-4 border rounded shadow-md space-y-2">
+          <div
+            key={post._id}
+            className="p-4 border rounded shadow-md space-y-2"
+          >
             <h3 className="text-lg font-bold">{post.title}</h3>
 
             <div className="mt-2">

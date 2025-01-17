@@ -2,9 +2,22 @@ import usePosts from "../Hooks/userPosts";
 import { FaRegComment } from "react-icons/fa";
 import { BiUpvote } from "react-icons/bi";
 import { MdOutlineDelete } from "react-icons/md";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { toast } from 'react-hot-toast';
+import { Link } from "react-router-dom";
 
 const MyPost = () => {
   const [posts, refetch, isLoading] = usePosts();
+  const axiosSecure = useAxiosSecure();
+
+  const handleDelete = async (id) => {
+    const res = await axiosSecure.delete(`/post/${id}`);
+    if(res.data.deletedCount > 0){
+      refetch();
+      return toast.success("Post Deleted!")
+    }
+  }
+
 
   return (
     <div className="min-h-screen flex flex-col items-center  gap-4 p-4 md:p-10">
@@ -31,13 +44,21 @@ const MyPost = () => {
                 <tr key={i}>
                   <th>{i + 1}</th>
                   <td>{post.title}</td>
-                  <td className="flex items-center gap-1" ><BiUpvote /><span className="font-semibold" >{0}</span></td>
+                  <td className="flex items-center gap-1">
+                    <BiUpvote />
+                    <span className="font-semibold">{0}</span>
+                  </td>
 
                   <td>
-                    <button className=""><FaRegComment /></button>
+                    <Link to={`/comments/${post._id}`} className="">
+                      <FaRegComment />
+                    </Link>
                   </td>
                   <td>
-                    <button className=""> <MdOutlineDelete /></button>
+                    <button onClick={() => handleDelete(post._id)} className="">
+                      {" "}
+                      <MdOutlineDelete />
+                    </button>
                   </td>
                 </tr>
               ))}
