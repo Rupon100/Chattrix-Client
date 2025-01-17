@@ -10,6 +10,9 @@ const AddPost = () => {
   const axiosSecure = useAxiosSecure();
   const [limit, setLimit] = useState(true);
 
+  const today = new Date();
+  const formattedDate = today.toISOString();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -38,6 +41,7 @@ const AddPost = () => {
     const data = {
       photoURL,
       displayName,
+      date: formattedDate,
       email,
       title,
       description,
@@ -49,10 +53,12 @@ const AddPost = () => {
     };
 
     const res = await axiosSecure.post("/addpost", data);
+
+    console.log(res)
+
     if (res.data.insertedId) {
       form.reset();
       toast.success("Posted successfully!");
-     
     }
 
     
