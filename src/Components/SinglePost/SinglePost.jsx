@@ -1,10 +1,12 @@
 import { FaRegComment } from "react-icons/fa";
 import { FaChevronCircleUp } from "react-icons/fa";
 import { FaChevronCircleDown } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const SinglePost = ({ post }) => {
-  console.log(post.date);
+  
   const {
+    _id,
     photoURL,
     displayName,
     date,
@@ -14,10 +16,10 @@ const SinglePost = ({ post }) => {
     tags,
     votes: {upvote, downvote},
   } = post;
-   
 
+   
   return (
-    <div className="border border-gray-50 rounded flex gap-4 flex-col p-2 justify-center h-full">
+    <Link to={`/details/${_id}`} className="border border-gray-50 rounded flex gap-4 flex-col p-2 justify-center h-full">
       <div className="flex flex-col gap-2">
         <div className="flex-shrink-0">
           <div className="flex items-center gap-2">
@@ -49,21 +51,21 @@ const SinglePost = ({ post }) => {
       </div>
       <div className="flex-grow flex gap-3 items-center">
         <div className="flex bg-gray-100/10 rounded" >
-          <div className="flex items-center gap-1 p-2 rounded-s hover:bg-gray-50/5  transition-all">
+          <div className="flex items-center gap-1 p-2 rounded-s  ">
             <FaChevronCircleUp />
             <span>UpVote: {upvote}</span>
           </div>
-          <div className="flex items-center gap-1 p-2 rounded-e hover:bg-gray-50/5  transition-all">
+          <div className="flex items-center gap-1 p-2 rounded-e  ">
             <FaChevronCircleDown />
-            <span>{downvote}</span>
+            <span>DownVote: {downvote}</span>
           </div>
         </div>
-        <div className="flex items-center gap-1 p-2 rounded bg-gray-100/10 hover:bg-gray-50/5  transition-all">
+        <div className="flex items-center gap-1 p-2 rounded bg-gray-100/10  ">
           <FaRegComment />
           <span>{0}</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

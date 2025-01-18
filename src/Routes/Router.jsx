@@ -12,6 +12,7 @@ import MyProfile from "../UserDash/MyProfile";
 import AddPost from "../UserDash/AddPost";
 import Membership from "../Pages/Membership";
 import AllComments from "../Pages/AllComments";
+import PostDetails from "../Components/PostDetails/PostDetails";
 
 const Router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const Router = createBrowserRouter([
             {
                 path: '/comments/:id',
                 element: <PrivateRoute><AllComments></AllComments></PrivateRoute>
+            },
+            {
+                path: '/details/:id',
+                element: <PrivateRoute><PostDetails></PostDetails></PrivateRoute>
             }
         ]
     },
