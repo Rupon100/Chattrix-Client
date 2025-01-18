@@ -12,8 +12,10 @@ const SinglePost = ({ post }) => {
     title,
     description,
     tags,
-    votes,
+    votes: {upvote, downvote},
   } = post;
+   
+
   return (
     <div className="border border-gray-50 rounded flex gap-4 flex-col p-2 justify-center h-full">
       <div className="flex flex-col gap-2">
@@ -49,11 +51,11 @@ const SinglePost = ({ post }) => {
         <div className="flex bg-gray-100/10 rounded" >
           <div className="flex items-center gap-1 p-2 rounded-s hover:bg-gray-50/5  transition-all">
             <FaChevronCircleUp />
-            <span>UpVote: {0}</span>
+            <span>UpVote: {upvote}</span>
           </div>
           <div className="flex items-center gap-1 p-2 rounded-e hover:bg-gray-50/5  transition-all">
             <FaChevronCircleDown />
-            <span>{0}</span>
+            <span>{downvote}</span>
           </div>
         </div>
         <div className="flex items-center gap-1 p-2 rounded bg-gray-100/10 hover:bg-gray-50/5  transition-all">
