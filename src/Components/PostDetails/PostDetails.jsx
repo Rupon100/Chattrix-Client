@@ -8,13 +8,21 @@ import {
 } from "react-icons/fa";
 import { WhatsappShareButton, WhatsappIcon } from "react-share";
 import { useState } from "react";
+import { toast } from 'react-hot-toast';
+import Comments from "../CommentSection/Comments";
+import useAuth from "../../Hooks/useAuth";
+ 
+ 
 
 const PostDetails = () => {
+  const {user} = useAuth();
   const { id } = useParams();
   const [isCommentVisible, setIsCommentVisible] = useState(false);
+  // const [commentsRefetch, setCommentsRefetch] = useState(null); 
   const axiosSecure = useAxiosSecure();
   const shareUrl = window.location.href;
   const queryClient = useQueryClient();
+
 
   const { data: detail = {}, isLoading } = useQuery({
     queryKey: ["details", id],
@@ -23,6 +31,35 @@ const PostDetails = () => {
       return res.data;
     },
   });
+
+  const {
+    _id,
+    photoURL,
+    displayName,
+    date,
+    email,
+    title,
+    description,
+    tags,
+    votes,
+  } = detail || {};
+
+   
+
+  //comments
+  const {
+    data: comments = [],
+    refetch,
+    isLoading: comntLoading,
+  } = useQuery({
+    enabled: !!_id,
+    queryKey: ["comments", _id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/comments/${_id}`);
+      return res.data;
+    },
+  });
+
 
   const handleUpvote = useMutation({
     mutationFn: async (id) => {
@@ -42,22 +79,9 @@ const PostDetails = () => {
     },
   });
 
-  const {
-    _id,
-    photoURL,
-    displayName,
-    date,
-    email,
-    title,
-    description,
-    tags = [],
-    votes,
-  } = detail || {};
 
   const upvote = votes?.upvote || 0;
   const downvote = votes?.downvote || 0;
-
-  console.log(upvote);
 
   if (isLoading) {
     return (
@@ -70,6 +94,29 @@ const PostDetails = () => {
   const handleCommentClick = () => {
     setIsCommentVisible(prevState => !prevState);
   };
+
+
+ 
+
+  const handleComment = async(e) => {
+    e.preventDefault();
+    const msg = e.target.comment.value;
+    const commentInfo = {
+      msg,
+      postId: _id,
+      email,
+      userImg: user?.photoURL,
+      userName: user?.displayName,
+      date: new Date() 
+    }
+    const res = await axiosSecure.post('/comment-post', commentInfo);
+    if(res?.data?.insertedId){
+      toast.success("comment successfull!");
+      e.target.reset();
+      refetch();
+    }
+    
+  }
 
   return (
     <div className="bg-gradient-to-r from-black to-sky-950 min-h-screen p-4 md:p-8">
@@ -122,20 +169,24 @@ const PostDetails = () => {
             <FaRegComment />
           </button>
           <WhatsappShareButton url={shareUrl}>
-            <WhatsappIcon size={32} round={true}></WhatsappIcon>
+            <WhatsappIcon size={37} round={false}></WhatsappIcon>
           </WhatsappShareButton>
         </div>
         {isCommentVisible && (
-        <div className="mt-4">
+        <form onSubmit={(e) => handleComment(e)} className="mt-4">
           <textarea
+            name="comment"
             placeholder="Write a comment..."
             rows="4"
             className="w-full p-2 resize-none rounded border bg-gray-700 text-white"
           />
-        </div>
+          <button className="px-4 py-1 border my-2 rounded hover:bg-gray-50/10 transition-all" >Comment</button>
+        </form>
       )}
       </div>
-      
+      <div className="border border-gray-600 rounded max-w-2xl mx-auto my-4" >
+        <Comments comments={comments} loading={comntLoading} ></Comments>
+      </div>
     </div>
   );
 };
