@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAllPost from "../../Hooks/useAllPost";
 import SinglePost from "../SinglePost/SinglePost";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa";
 
 const AllPosts = () => {
-  const [posts] = useAllPost()  
+  const [posts, refetch, isLoading] = useAllPost()  
   const [currentPage, setCurrentPage] = useState(1); 
 
 
@@ -23,7 +23,15 @@ const AllPosts = () => {
   const handlePrevPage = () => {
     if (currentPage > 1) setCurrentPage((prev) => prev - 1);
   };
- 
+
+  if(isLoading){
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
+
 
   return (
     <div className="p-4 md:p-8 text-white space-y-4">
