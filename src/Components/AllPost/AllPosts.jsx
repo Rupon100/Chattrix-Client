@@ -3,18 +3,26 @@ import useAllPost from "../../Hooks/useAllPost";
 import SinglePost from "../SinglePost/SinglePost";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const AllPosts = () => {
-  const [posts, refetch, isLoading] = useAllPost()  
+  const [posts, refetch, isLoading] = useAllPost();
+  const [postts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); 
+  const axiosSecure = useAxiosSecure();
 
+  useEffect(() => {
+    if (!isLoading) {
+      setPosts(posts);  
+    }
+  }, [posts, isLoading]);
 
   const postPerPage = 5;
-  const totalPosts = posts.length;
+  const totalPosts = postts.length;
   const totalPages = Math.ceil(totalPosts / postPerPage);  
 
   const startIndex = (currentPage - 1) * postPerPage;
-  const currentPosts = posts.slice(startIndex, startIndex + postPerPage);
+  const currentPosts = postts.slice(startIndex, startIndex + postPerPage);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
@@ -33,8 +41,11 @@ const AllPosts = () => {
   };
 
 
-  const handleSort = () => {
-    
+  const handleSort = async() => {
+    const res = await axiosSecure.get('/sortposts');
+    setPosts(res.data);
+    console.log(res.data);
+    setCurrentPage(1);
   }
 
 
