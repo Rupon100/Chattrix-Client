@@ -1,9 +1,12 @@
+import { useQuery } from "@tanstack/react-query";
 import { FaRegComment } from "react-icons/fa";
 import { FaChevronCircleUp } from "react-icons/fa";
 import { FaChevronCircleDown } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const SinglePost = ({ post }) => {
+  const axiosSecure = useAxiosSecure();
   
   const {
     _id,
@@ -17,6 +20,15 @@ const SinglePost = ({ post }) => {
     votes: {upvote, downvote},
   } = post;
 
+  const {data} = useQuery({
+    queryKey: ['cmnt-count', _id],
+    queryFn: async() => {
+      const res = await axiosSecure.get(`/comments-count/${_id}`);
+      return res.data;
+    }
+  })
+
+  console.log(data?.result)
    
   return (
     <Link to={`/details/${_id}`} className="border border-gray-50 rounded flex gap-4 flex-col p-2 justify-center h-full">
@@ -62,7 +74,7 @@ const SinglePost = ({ post }) => {
         </div>
         <div className="flex items-center gap-1 p-2 rounded bg-gray-100/10  ">
           <FaRegComment />
-          <span>{0}</span>
+          <span>{data?.result}</span>
         </div>
       </div>
     </Link>

@@ -115,8 +115,9 @@ const PostDetails = () => {
       e.target.reset();
       refetch();
     }
-    
   }
+
+  console.log(_id);
 
   return (
     <div className="bg-gradient-to-r from-black to-sky-950 min-h-screen p-4 md:p-8">

@@ -30,6 +30,11 @@ const AllPosts = () => {
         <span className="loading loading-spinner loading-lg"></span>
       </div>
     );
+  };
+
+
+  const handleSort = () => {
+    
   }
 
 
@@ -37,7 +42,7 @@ const AllPosts = () => {
     <div className="p-4 md:p-8 text-white space-y-4">
       <div className="flex justify-between">
         <div className="font-semibold text-xl">All Post</div>
-        <div className="btn btn-sm">Sort by Popularity</div>
+        <button onClick={handleSort} className="btn btn-sm">Sort by Popularity</button>
       </div>
       <div className="max-w-2xl mx-auto grid grid-cols-1  gap-4 md:grid-6">
         {currentPosts.map((post) => (
