@@ -136,8 +136,11 @@ const AllPosts = () => {
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    if (!isLoading) {
-      setAllPosts(posts);  
+    // if (!isLoading) {
+    //   setAllPosts(posts);  
+    // }
+    if (!isLoading && posts.length > 0) {
+      setAllPosts(posts);
     }
   }, [posts, isLoading]);
 
@@ -197,7 +200,7 @@ const AllPosts = () => {
       </div>
       <div className="flex justify-center space-x-4 mt-4">
         <button
-          className="px-4 py-1 border flex items-center gap-1"
+          className="px-4 py-1 border flex items-center gap-1 hover:bg-gray-50/10 transition-all"
           disabled={currentPage === 1}
           onClick={handlePrevPage}
         >
@@ -208,7 +211,7 @@ const AllPosts = () => {
           Page {currentPage} .. {totalPages}
         </span>
         <button
-          className="px-4 py-1 border flex items-center gap-1"
+          className="px-4 py-1 border flex items-center gap-1 hover:bg-gray-50/10 transition-all"
           disabled={currentPage === totalPages}
           onClick={handleNextPage}
         >

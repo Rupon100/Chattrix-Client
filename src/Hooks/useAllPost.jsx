@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "./useAxiosSecure";
+import useAxiosPublic from "./useAxiosPublic";
  
 const useAllPost = () => {
-    const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
     const { data: allposts = [], refetch, isLoading } = useQuery({
         queryKey: ['allpost'],
         queryFn: async() => {
-            const res = await axiosSecure.get('/allposts');
+            const res = await axiosPublic.get('/allposts');
             return res.data;
         }
     })

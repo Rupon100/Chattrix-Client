@@ -13,6 +13,8 @@ const MyProfile = () => {
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 3);
 
+    console.log(recentPosts)
+
   return (
     <div className="p-4 md:p-8 flex flex-col justify-center gap-4 items-center">
       <div className="text-center flex flex-col items-center gap-2 md:gap-4 space-y-3">
