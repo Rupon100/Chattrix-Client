@@ -15,6 +15,7 @@ export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
   const axiosPublic = useAxiosPublic();
@@ -45,37 +46,7 @@ const AuthProvider = ({ children }) => {
       photoURL: photo,
     });
   };
-
-  // useEffect(() => {
-  //     const unsubscribe = onAuthStateChanged(auth, currentUser => {
-  //         if(currentUser){
-  //             // get token and store client
-  //             const userInfo = {email: currentUser?.email};
-
-  //             axiosPublic.post('/jwt', userInfo)
-  //             .then(res => {
-
-  //                 if(res.data.token){
-  //                     localStorage.setItem('access-token', res.data.token);
-  //                     console.log(res.data.token)
-  //                     setUser(currentUser);
-  //                     setLoading(false);
-  //                 }
-  //             })
-  //         }else{
-  //             // todo:  remove token(if stored)
-  //             localStorage.removeItem('access-token');
-
-  //             setUser(currentUser);
-  //             setLoading(false);
-  //         }
-
-  //     });
-  //     return () => {
-  //         return unsubscribe();
-  //     }
-  // }, [axiosPublic]);
-
+ 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
       if (currentUser) {
@@ -124,6 +95,8 @@ const AuthProvider = ({ children }) => {
     logOut,
     updateUserProfile,
     googleSignin,
+    filteredPosts, 
+    setFilteredPosts
   };
 
   return (

@@ -28,8 +28,6 @@ const SinglePost = ({ post }) => {
     }
   })
 
-  console.log(data?.result)
-   
   return (
     <Link to={`/details/${_id}`} className="border border-gray-50 rounded flex gap-4 flex-col p-2 justify-center h-full">
       <div className="flex flex-col gap-2">
