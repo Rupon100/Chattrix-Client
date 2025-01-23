@@ -12,6 +12,7 @@ const usePosts = () => {
   } = useQuery({
     queryKey: ["userposts", user?.email],
     queryFn: async () => {
+      if (!user?.email) return [];
       const res = await axiosSecure.get(`/userposts?email=${user?.email}`);
       return res.data;
     },

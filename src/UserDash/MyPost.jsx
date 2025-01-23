@@ -5,10 +5,13 @@ import { MdOutlineDelete } from "react-icons/md";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { toast } from 'react-hot-toast';
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import useAuth from "../Hooks/useAuth";
 
 const MyPost = () => {
   const [posts, refetch, isLoading] = usePosts();
   const axiosSecure = useAxiosSecure();
+  const {user} = useAuth();
 
   const handleDelete = async (id) => {
     const res = await axiosSecure.delete(`/post/${id}`);
@@ -17,7 +20,10 @@ const MyPost = () => {
       return toast.success("Post Deleted!")
     }
   }
+ 
 
+  console.log(posts)
+ 
 
   return (
     <div className="min-h-screen flex flex-col items-center  gap-4 p-4 md:p-10">
@@ -46,7 +52,9 @@ const MyPost = () => {
                   <td>{post.title}</td>
                   <td className="flex items-center gap-1">
                     <BiUpvote />
-                    <span className="font-semibold">{0}</span>
+
+                    <span className="font-semibold">{post.voteCount || 0}</span>
+
                   </td>
 
                   <td>
