@@ -3,6 +3,7 @@ import bronzeImg from "../assets/bronze.png";
 import goldImg from "../assets/gold.png";
 import usePosts from "../Hooks/userPosts";
 import useUsers from "../Hooks/useUsers";
+import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
   const { user } = useAuth();
@@ -17,9 +18,12 @@ const MyProfile = () => {
 
   return (
     <div className="p-4 md:p-8 flex flex-col justify-center gap-4 items-center">
+      <Helmet>
+        <title>Dashboard | Profile</title>
+      </Helmet>
       <div className="text-center flex flex-col items-center gap-2 md:gap-4 space-y-3">
         <h3 className="text-xl font-semibold">{user?.email}</h3>
-        <div>
+        <div className="flex flex-col items-center" >
           <img className="w-28 rounded-lg" src={user?.photoURL} alt="" />
           <h2 className="text-2xl font-semibold">{user?.displayName}</h2>
         </div>

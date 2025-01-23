@@ -8,6 +8,7 @@ const usePosts = () => {
   const {
     data: posts = [],
     isLoading,
+    isFetched,
     refetch,
   } = useQuery({
     queryKey: ["userposts", user?.email],
@@ -16,8 +17,9 @@ const usePosts = () => {
       const res = await axiosSecure.get(`/userposts?email=${user?.email}`);
       return res.data;
     },
+    enabled: !!user?.email,
   });
-  return [posts, refetch, isLoading]
+  return [posts, isLoading, isFetched, refetch]
 };
 
 export default usePosts;

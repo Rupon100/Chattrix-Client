@@ -13,6 +13,12 @@ import AddPost from "../UserDash/AddPost";
 import Membership from "../Pages/Membership";
 import AllComments from "../Pages/AllComments";
 import PostDetails from "../Components/PostDetails/PostDetails";
+import AdminDashboard from './../Layout/Admindashboard/AdminDashboard';
+import AdminProfile from "../AdminDash/AdminProfile";
+import ManageUsers from "../AdminDash/ManageUsers";
+import Report from "../AdminDash/Report";
+import MakeAnnouncement from "../AdminDash/MakeAnnouncement";
+import AdminCheckRoute from "./AdminCheckRoute";
 
 const Router = createBrowserRouter([
     {
@@ -61,6 +67,28 @@ const Router = createBrowserRouter([
             {
                 path: 'mypost',
                 element: <PrivateRoute><MyPost></MyPost></PrivateRoute>
+            }
+        ]
+    },
+    {
+        path: 'admin-dashboard',
+        element: <PrivateRoute></PrivateRoute>,
+        children: [
+            {
+                path: 'admin-profile',
+                element: <PrivateRoute><AdminCheckRoute><AdminProfile></AdminProfile></AdminCheckRoute></PrivateRoute>
+            },
+            {
+                path: 'manage-users',
+                element: <PrivateRoute><ManageUsers></ManageUsers></PrivateRoute>
+            },
+            {
+                path: 'report',
+                element: <PrivateRoute><Report></Report></PrivateRoute>
+            },
+            {
+                path: 'admin-announcement',
+                element: <PrivateRoute><MakeAnnouncement></MakeAnnouncement></PrivateRoute>
             }
         ]
     }
