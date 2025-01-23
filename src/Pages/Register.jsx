@@ -62,12 +62,13 @@ const Register = () => {
         >
           {/* usernaem */}
           <div className="mb-4">
-            <label htmlFor="username" className="block text-sm font-semibold">
+            <label htmlFor="username" className="block text-sm  text-white font-semibold">
               Username
             </label>
             <input
               id="username"
               type="text"
+              placeholder="Name"
               className="w-full p-2 border border-gray-300 rounded-md"
               {...register("username", { required: "Username is required" })}
             />
@@ -80,12 +81,13 @@ const Register = () => {
 
           {/* Email */}
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-semibold">
+            <label htmlFor="email" className="block text-sm  text-white font-semibold">
               Email
             </label>
             <input
               id="email"
               type="email"
+              placeholder="Email"
               className="w-full p-2 border border-gray-300 rounded-md"
               {...register("email", {
                 required: "Email is required",
@@ -104,7 +106,7 @@ const Register = () => {
 
           {/* choose an image */}
           <div className="mb-4">
-            <label htmlFor="image" className="block text-sm font-semibold">
+            <label htmlFor="image" className="block text-sm  text-white font-semibold">
               photoURL
             </label>
             <input
@@ -125,12 +127,13 @@ const Register = () => {
 
           {/* Password */}
           <div className="mb-4">
-            <label htmlFor="password" className="block text-sm font-semibold">
+            <label htmlFor="password" className="block text-sm text-white font-semibold">
               Password
             </label>
             <input
               id="password"
               type="password"
+              placeholder="Password"
               className="w-full p-2 border border-gray-300 rounded-md"
               {...register("password", {
                 required: "Password is required",
