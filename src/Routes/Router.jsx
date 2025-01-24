@@ -72,7 +72,7 @@ const Router = createBrowserRouter([
     },
     {
         path: 'admin-dashboard',
-        element: <PrivateRoute></PrivateRoute>,
+        element: <PrivateRoute><AdminCheckRoute><AdminDashboard></AdminDashboard></AdminCheckRoute></PrivateRoute>,
         children: [
             {
                 path: 'admin-profile',
@@ -80,15 +80,15 @@ const Router = createBrowserRouter([
             },
             {
                 path: 'manage-users',
-                element: <PrivateRoute><ManageUsers></ManageUsers></PrivateRoute>
+                element: <PrivateRoute><AdminCheckRoute><ManageUsers></ManageUsers></AdminCheckRoute></PrivateRoute>
             },
             {
                 path: 'report',
-                element: <PrivateRoute><Report></Report></PrivateRoute>
+                element: <PrivateRoute><AdminCheckRoute><Report></Report></AdminCheckRoute></PrivateRoute>
             },
             {
                 path: 'admin-announcement',
-                element: <PrivateRoute><MakeAnnouncement></MakeAnnouncement></PrivateRoute>
+                element: <PrivateRoute><AdminCheckRoute><MakeAnnouncement></MakeAnnouncement></AdminCheckRoute></PrivateRoute>
             }
         ]
     }

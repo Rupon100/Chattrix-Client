@@ -76,7 +76,7 @@ const Navbar = () => {
                   {user?.displayName || 'User'}
                 </li>
                 <li>
-                  <Link to={`/dashboard/profile`}>Dashboard</Link>
+                  <Link to={user?.email === "admin@gmail.com" ? "/admin-dashboard/admin-profile" : "/dashboard/profile"}>Dashboard</Link>
                 </li>
                 <li onClick={handleLogout}>
                   <a>Logout</a>

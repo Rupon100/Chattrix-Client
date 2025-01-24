@@ -14,7 +14,6 @@ const MyProfile = () => {
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 3);
 
-    console.log(recentPosts)
 
   return (
     <div className="p-4 md:p-8 flex flex-col justify-center gap-4 items-center">
@@ -24,7 +23,7 @@ const MyProfile = () => {
       <div className="text-center flex flex-col items-center gap-2 md:gap-4 space-y-3">
         <h3 className="text-xl font-semibold">{user?.email}</h3>
         <div className="flex flex-col items-center" >
-          <img className="w-28 rounded-lg" src={user?.photoURL} alt="" />
+          <img className="w-28 h-28 rounded-lg" src={user?.photoURL} alt="" />
           <h2 className="text-2xl font-semibold">{user?.displayName}</h2>
         </div>
         <div className="flex items-center flex-col font-bold">

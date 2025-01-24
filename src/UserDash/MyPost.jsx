@@ -19,7 +19,7 @@ const MyPost = () => {
     }
   };
 
-  console.log(posts.length);
+  console.log("posts length: ", posts.length);
 
   return (
     <div className="min-h-screen flex flex-col items-center  gap-4 p-4 md:p-10">
@@ -29,10 +29,11 @@ const MyPost = () => {
       <h2 className="text-2xl md:text-4xl capitalize font-semibold">
         All the post you posted!
       </h2>
-       
-      {  isLoading ? (
+      {/* isLoading ? (
         <span className="loading loading-spinner loading-lg"></span>
-      ) : isFetched && posts.length === 0 ? (
+      ) : isFetched && */}
+       
+      {   posts.length === 0 ? (
         <div className="text-center text-gray-500 mt-4">
           <p>No posts found. Start posting!</p>
         </div>

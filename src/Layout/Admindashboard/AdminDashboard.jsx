@@ -1,15 +1,19 @@
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const AdminDashboard = () => {
     const { user } = useAuth();
   return (
     <div className="bg-gradient-to-r from-black to-sky-950 text-white min-h-screen p-4 md:p-8">
+      <Helmet>
+        <title>Dashboard | Admin</title>
+      </Helmet>
       <div className="max-w-6xl mx-auto">
         <nav className="flex items-center justify-between">
           <div className="flex items-center gap-1">
-            <img className="w-12 rounded-full " src={user?.photoURL} alt="" />
+            <img className="w-12 h-12 object-cover rounded-full " src={user?.photoURL} alt="" />
             <Link
               to={`/`}
               className="border px-4 py-1 rounded font-semibold flex items-center gap-2"
@@ -21,21 +25,21 @@ const AdminDashboard = () => {
 
           <ul className="space-x-2 hidden lg:flex ml-auto">
             <Link
-              to={`/dashboard/profile`}
+              to={`/admin-dashboard/admin-profile`}
               className="border px-4 py-1 rounded"
             >
               Admin Profile
             </Link>
             <Link
-              to={`/dashboard/addpost`}
+              to={`/admin-dashboard/manage-users`}
               className="border px-4 py-1 rounded"
             >
               Manage Users
             </Link>
-            <Link to={`/dashboard/mypost`} className="border px-4 py-1 rounded">
+            <Link to={`/admin-dashboard/report`} className="border px-4 py-1 rounded">
               Report Activities
             </Link>
-            <Link to={`/dashboard/mypost`} className="border px-4 py-1 rounded">
+            <Link to={`/admin-dashboard/admin-announcement`} className="border px-4 py-1 rounded">
               Make Announcement
             </Link>
           </ul>
@@ -62,27 +66,35 @@ const AdminDashboard = () => {
               className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow text-black gap-2 font-semibold"
             >
               <Link
-                to={`/dashboard/profile`}
+                to={`/admin-dashboard/admin-profile`}
                 className="border px-4 py-1 rounded"
               >
-                My Profile
+                Admin Profile
               </Link>
               <Link
-                to={`/dashboard/addpost`}
+                to={`/admin-dashboard/manage-users`}
                 className="border px-4 py-1 rounded"
               >
-                Add Post
+                Manage users
               </Link>
               <Link
-                to={`/dashboard/mypost`}
+                to={`/admin-dashboard/report`}
                 className="border px-4 py-1 rounded"
               >
-                My Posts
+                Report
+              </Link>
+              <Link
+                to={`/admin-dashboard/admin-announcement`}
+                className="border px-4 py-1 rounded"
+              >
+                Announcement
               </Link>
             </ul>
           </div>
         </nav>
-        <Outlet></Outlet>
+        <Outlet>
+
+        </Outlet>
       </div>
     </div>
   );
