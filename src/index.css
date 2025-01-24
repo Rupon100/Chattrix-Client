@@ -7,4 +7,7 @@
     .nav {
         @apply flex justify-center items-center border no-underline text-white hover:text-white focus:text-white active:text-white focus:bg-sky-700;
     }
+    .dropdown {
+        @apply bg-gray-800 text-white;
+    }
 }

@@ -55,7 +55,7 @@ const Joinus = () => {
             <input
               type="email"
               placeholder="email"
-              className="input input-bordered"
+              className="input input-bordered text-black"
               {...register("email", {
                 required: "Email is required",
                 pattern: {

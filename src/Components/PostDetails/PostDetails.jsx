@@ -104,7 +104,7 @@ const PostDetails = () => {
     const commentInfo = {
       msg,
       postId: _id,
-      email,
+      email: user?.email,
       userImg: user?.photoURL,
       userName: user?.displayName,
       date: new Date() 

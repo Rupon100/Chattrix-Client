@@ -57,7 +57,7 @@ const Navbar = () => {
               <span className="loading loading-spinner loading-lg"></span>
             </div>
           ) : user?.email ? (
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end flex  ">
               <div
                 tabIndex={0}
                 role="button"
@@ -70,7 +70,7 @@ const Navbar = () => {
 
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow text-center text-white bg-sky-950 flex flex-col justify-center "
+                className="menu menu-sm dropdown-content rounded-box z-[1] mt-16 w-52 p-2 shadow text-center text-white bg-sky-950 flex flex-col justify-center "
               >
                 <li className="text-center font-semibold text-lg">
                   {user?.displayName || 'User'}
