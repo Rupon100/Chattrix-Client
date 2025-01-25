@@ -60,7 +60,9 @@ const AuthProvider = ({ children }) => {
 
 
               const userData = {
-                email: currentUser.email,
+                name: currentUser?.displayName,
+                email: currentUser?.email,
+                role: "user",
                 badge: 'bronze',
               };
 
