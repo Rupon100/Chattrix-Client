@@ -52,7 +52,7 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-black to-sky-950">
+    <div className="bg-gradient-to-r from-black to-sky-950 min-h-screen flex justify-center items-center">
       <div className="max-w-sm mx-auto p-10 text-white  rounded-md">
         <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
 

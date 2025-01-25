@@ -1,16 +1,23 @@
 import React, { PureComponent, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { BarChart, Bar, ResponsiveContainer } from "recharts";
+import {
+  BarChart,
+  Bar,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
-import { toast } from 'react-hot-toast';
+import { toast } from "react-hot-toast";
 
 const AdminProfile = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const [tag, setTag] = useState('');
+  const [tag, setTag] = useState("");
 
-  const { data: allsectionCount } = useQuery({
+  const { data: allsectionCount = [] } = useQuery({
     queryKey: ["allsectionCount"],
     queryFn: async () => {
       const res = await axiosSecure.get("/count-all");
@@ -18,11 +25,10 @@ const AdminProfile = () => {
     },
   });
 
-
   const data = [
     {
       name: "Total Posts",
-      uv: allsectionCount?.postCount || 0,  
+      uv: allsectionCount?.postCount || 0,
     },
     {
       name: "Total Comments",
@@ -35,18 +41,44 @@ const AdminProfile = () => {
   ];
 
   const handleInputChange = (e) => {
-    setTag(e.target.value);   
+    setTag(e.target.value);
   };
 
-   
   const handleTags = async () => {
-    const res = await axiosSecure.post('/tag-post', {tag});
-    if(res.data.insertedId){
+    const res = await axiosSecure.post("/tag-post", { tag });
+    if (res.data.insertedId) {
       return toast.success("tag added!");
     }
-    setTag('');
+    setTag("");
   };
 
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+    index,
+  }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
 
   return (
     <div className="min-h-screen flex justify-center items-center">
@@ -63,30 +95,65 @@ const AdminProfile = () => {
           </h2>
         </div>
         <div className="flex justify-between items-center">
-          <div className="p-3 m-2 text-xl font-semibold border">
+          <div className="p-3 m-2 text-xl font-semibold border bg-[#0088FE]">
             Total posts: {allsectionCount?.postCount}
           </div>
-          <div className="p-3 m-2 text-xl font-semibold border">
+          <div className="p-3 m-2 text-xl font-semibold border bg-[#00C49F]">
             Total Comments: {allsectionCount?.commentsCount}
           </div>
-          <div className="p-3 m-2 text-xl font-semibold border">
+          <div className="p-3 m-2 text-xl font-semibold border bg-[#FFBB28]">
             Total Users: {allsectionCount?.userCount}
           </div>
         </div>
-        <div className="h-[400px] w-full border text-white " >
+
+        <div className="h-[400px] w-full  text-white ">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart width={600} height={600}>
+              <Pie
+                data={data}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={renderCustomizedLabel}
+                outerRadius={150}
+                fill="#8884d8"
+                dataKey="uv"
+              >
+                {data.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* <div className="h-[400px] w-full border text-white " >
           <ResponsiveContainer width="100%" height={400}className={`text-white`}>
             <BarChart data={data} className="text-white" >
               <Bar dataKey="uv" fill="#294973" />
             </BarChart>
           </ResponsiveContainer>
-        </div>
-        <div className="divider bg-gray-600 h-[1px]" ></div>
-        <div className="p-2 flex flex-col justify-center gap-1 items-center" > 
-          <h2 className="text-xl md:text-2xl font-semibold" >Add Tags</h2>
-          <div className="flex gap-1" >
+        </div> */}
 
-          <input onChange={handleInputChange} type="text" placeholder="Add tags from here" className="input text-black input-bordered w-full" />
-          <button onClick={handleTags} className="px-4 py-2 rounded-lg border hover:bg-gray-50/10" >Add</button>
+        <div className="divider bg-gray-600 h-[1px]"></div>
+        <div className="p-2 flex flex-col justify-center gap-1 items-center">
+          <h2 className="text-xl md:text-2xl font-semibold">Add Tags</h2>
+          <div className="flex gap-1">
+            <input
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Add tags from here"
+              className="input text-black input-bordered w-full"
+            />
+            <button
+              onClick={handleTags}
+              className="px-4 py-2 rounded-lg border hover:bg-gray-50/10"
+            >
+              Add
+            </button>
           </div>
         </div>
       </div>

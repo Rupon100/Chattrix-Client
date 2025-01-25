@@ -16,7 +16,7 @@ const Comments = ({ comments, loading }) => {
         <div key={comment._id} className="bg-gray-50/10 rounded p-2 m-2 text-gray-400" >
             <div>
                 <div className="flex items-center gap-2" >
-                <img className="w-10 h-10 rounded" src={comment?.userImg} alt="" />
+                <img className="w-10 h-10 object-cover rounded" src={comment?.userImg} alt="" />
                 <h2 className="text-xl">{comment?.userName}</h2>
                 </div>
                 <small className="text-xs" >{comment?.date}</small>
