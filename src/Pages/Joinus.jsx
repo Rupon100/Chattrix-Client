@@ -74,7 +74,7 @@ const Joinus = () => {
           {/* password */}
           <div className="form-control mb-4">
             <label htmlFor="password" className="block text-sm font-semibold">
-              Email
+              Password
             </label>
             <input
               type="password"

@@ -5,14 +5,14 @@ import useAuth from "./useAuth";
 const useUsers = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const { data: users = [] } = useQuery({
+  const { data: users = [], isLoading } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/user/${user?.email}`);
       return res.data;
     },
   });
-  return [users];
+  return [users, isLoading];
 };
 
 export default useUsers;

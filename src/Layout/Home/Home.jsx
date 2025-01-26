@@ -3,6 +3,7 @@ import Announcement from "../../Components/Announcement/Announcement";
 import Banner from "../../Components/Banner/Banner";
 import Tags from "../../Components/Tags/Tags";
 import useAnnouncement from "../../Hooks/useAnnouncement";
+import useUsers from "../../Hooks/useUsers";
 
 const Home = () => {
   const [announcements, isLoading] = useAnnouncement();
