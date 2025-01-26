@@ -3,9 +3,11 @@ import { MdCardMembership } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
 import { IoNotifications } from "react-icons/io5";
 import useAuth from "../../Hooks/useAuth";
+import useAnnouncement from "../../Hooks/useAnnouncement";
 
 const Navbar = () => {
   const { user, loading, logOut } = useAuth();
+  const [announcements] = useAnnouncement();
 
   console.log(user);
 
@@ -28,9 +30,9 @@ const Navbar = () => {
         </Link>
       </li>
       <li>
-        <Link className="nav ">
+        <Link to={`/announcement`} className="nav ">
           <IoNotifications />
-          <div className="badge bg-gray-500 text-white">+0</div>
+          <div className={`badge bg-gray-500 text-white ${announcements.length > 0 && 'bg-red-600'}`}>+{announcements?.length}</div>
         </Link>
       </li>
     </>

@@ -19,6 +19,7 @@ import ManageUsers from "../AdminDash/ManageUsers";
 import Report from "../AdminDash/Report";
 import MakeAnnouncement from "../AdminDash/MakeAnnouncement";
 import AdminCheckRoute from "./AdminCheckRoute";
+import Announcement from "../Components/Announcement/Announcement";
 
 const Router = createBrowserRouter([
     {
@@ -37,6 +38,11 @@ const Router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+            
+            {
+                path: '/announcement',
+                element: <Announcement></Announcement>
             },
             {
                 path: '/member',
