@@ -1,8 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js'
+import CheckoutForm from './../UserDash/checkoutForm';
 
-const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY)
+const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY);
 
 const Membership = () => {
     console.log(stripePromise)
@@ -15,14 +16,14 @@ const Membership = () => {
         Become a member and get Gold badge!!!
       </h2>
       <div className="border w-full max-w-2xl mx-auto border-gray-600 p-4 rounded-lg">
-        <div className="" >
+        <div className="space-y-4" >
           <div className="flex justify-between items-center">
             <h2 className="font-semibold text-xl">Total Payment Amount</h2>
             <h2 className="flex font-semibold text-xl bg-gray-50/10 p-2 rounded-lg">$12.99</h2>
           </div>
-          <div>
+          <div className=' p-2' >
             <Elements stripe={stripePromise} >
-
+              <CheckoutForm></CheckoutForm>
             </Elements>
           </div>
         </div>
