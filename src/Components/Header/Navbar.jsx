@@ -4,12 +4,14 @@ import { FaHome } from "react-icons/fa";
 import { IoNotifications } from "react-icons/io5";
 import useAuth from "../../Hooks/useAuth";
 import useAnnouncement from "../../Hooks/useAnnouncement";
+import useUsers from "../../Hooks/useUsers";
 
 const Navbar = () => {
   const { user, loading, logOut } = useAuth();
   const [announcements] = useAnnouncement();
 
-  console.log(user);
+  const [users] = useUsers();
+  console.log(users?.role)
 
   const handleLogout = () => {
     logOut();
@@ -30,7 +32,7 @@ const Navbar = () => {
         </Link>
       </li>
       <li>
-        <Link to={`/announcement`} className="nav ">
+        <Link to={`/`} className="nav ">
           <IoNotifications />
           <div className={`badge bg-gray-500 text-white ${announcements.length > 0 && 'bg-red-600'}`}>+{announcements?.length}</div>
         </Link>
@@ -78,7 +80,7 @@ const Navbar = () => {
                   {user?.displayName || 'User'}
                 </li>
                 <li>
-                  <Link to={user?.email === "admin@gmail.com" ? "/admin-dashboard/admin-profile" : "/dashboard/profile"}>Dashboard</Link>
+                  <Link to={users?.role === "admin" ? "/admin-dashboard/admin-profile" : "/dashboard/profile"}>Dashboard</Link>
                 </li>
                 <li onClick={handleLogout}>
                   <a>Logout</a>

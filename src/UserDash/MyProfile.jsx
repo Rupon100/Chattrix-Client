@@ -23,19 +23,19 @@ const MyProfile = () => {
       <div className="text-center flex flex-col items-center gap-2 md:gap-4 space-y-3">
         <h3 className="text-xl font-semibold">{user?.email}</h3>
         <div className="flex flex-col items-center" >
-          <img className="w-28 h-28 rounded-lg" src={user?.photoURL} alt="" />
+          <img className="w-28 h-28 rounded-lg object-cover" src={user?.photoURL} alt="" />
           <h2 className="text-2xl font-semibold">{user?.displayName}</h2>
         </div>
         <div className="flex items-center flex-col font-bold">
           {users?.badge === "bronze" && (
             <div>
-              <img src={bronzeImg} alt="Bronze Badge" />
+              <img className="w-12 h-12 object-cover" src={bronzeImg} alt="Bronze Badge" />
               Bronze
             </div>
           )}
           {users?.badge === "gold" && (
             <div>
-              <img src={goldImg} alt="Gold Badge" />
+              <img className="object-cover" src={goldImg} alt="Gold Badge" />
               Gold
             </div>
           )}

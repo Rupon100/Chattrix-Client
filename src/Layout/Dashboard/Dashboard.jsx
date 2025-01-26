@@ -11,7 +11,7 @@ const Dashboard = () => {
         {/* user dashboard here all user content will be here */}
         <nav className="flex items-center justify-between">
           <div className="flex items-center gap-1">
-            <img className="w-12 rounded-full " src={user?.photoURL} alt="" />
+            <img className="w-12 h-12 object-cover rounded-full " src={user?.photoURL} alt="" />
             <Link
               to={`/`}
               className="border px-4 py-1 rounded font-semibold flex items-center gap-2"

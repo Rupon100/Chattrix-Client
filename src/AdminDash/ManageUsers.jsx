@@ -1,11 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet-async";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
+  const queryClient = useQueryClient(); 
   const [search, setSearch] = useState("");
+ 
+
   const { data: users = [] } = useQuery({
     queryKey: ["all-users", search],
     queryFn: async () => {
@@ -20,14 +23,13 @@ const ManageUsers = () => {
     setSearch(e.target.value);
   }
 
-  const handleStatus = () => {
-    console.log("now: admin");
+  const handleStatus = async(id) => {
+    const res = await axiosSecure.patch(`/user-role/${id}`);
+    console.log(res.data);
   }
+  
 
-  const handleMembership = () => {
-    console.log("Got Gold!");
-  }
-
+  
   return (
     <div className="flex gap-2 md:gap-4 flex-col justify-center items-center p-4 md:p-8">
       <Helmet>
@@ -60,10 +62,10 @@ const ManageUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>
-                    <button onClick={handleStatus} className={`btn btn-sm  text-white hover:bg-gray-50/10 ${user.role === "admin" ? 'bg-gray-50/10' : 'hover:bg-gray-50/10 bg-transparent'} `} >{user.role}</button>
+                    <button onClick={() => handleStatus(user._id)} className={`btn btn-sm  text-white hover:bg-gray-50/10 ${user.role === "admin" ? 'bg-gray-50/10' : 'hover:bg-gray-50/10 bg-transparent'} `} >{user.role}</button>
                 </td>
                 <td>
-                    <button onClick={handleMembership} className={`btn btn-sm  text-white hover:bg-gray-50/10  ${user.badge === "gold" ? 'bg-gray-50/10 ' : 'hover:bg-gray-50/10 bg-transparent'} `} >{user.badge}</button>
+                    <button className={`btn btn-sm  text-white hover:bg-gray-50/10  ${user.badge === "gold" ? 'bg-gray-50/10 ' : 'bg-gray-50/10'} `} >{user.badge}</button>
                 </td>
               </tr>
             ))
@@ -83,3 +85,7 @@ const ManageUsers = () => {
 };
 
 export default ManageUsers;
+
+
+
+ 

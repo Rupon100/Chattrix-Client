@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 import Select from "react-select";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const AddPost = () => {
   const { user } = useAuth();
@@ -85,6 +86,9 @@ const AddPost = () => {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Chattrix | Add Post</title>
+      </Helmet>
       {limit ? (
         <div className="text-white min-h-screen">
           <form
