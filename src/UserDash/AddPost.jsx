@@ -76,10 +76,17 @@ const AddPost = () => {
     const res = await axiosSecure.post("/addpost", data);
 
     if (res.data.insertedId) {
-      queryClient.setQueryData(["userposts", user?.email], (oldPosts) => [
-        data,
-        ...oldPosts,
-      ]);
+      // queryClient.setQueryData(["userposts", user?.email], (oldPosts) => [
+      //   data,
+      //   ...oldPosts,
+      // ]);
+
+      queryClient.setQueryData(["userposts", user?.email], (oldPosts = []) => {
+        if (!Array.isArray(oldPosts)) {
+          oldPosts = [];  
+        }
+        return [data, ...oldPosts];  
+      });
 
       form.reset();
       // setIsRefetch(true);

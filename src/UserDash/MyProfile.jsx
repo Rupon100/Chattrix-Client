@@ -10,10 +10,11 @@ const MyProfile = () => {
   const [users] = useUsers();
   const [posts] = usePosts();
 
-  const recentPosts = posts
+  const arrPosts = posts?.posts || [];
+
+  const recentPosts = arrPosts
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 3);
-
 
   return (
     <div className="p-4 md:p-8 flex flex-col justify-center gap-4 items-center">

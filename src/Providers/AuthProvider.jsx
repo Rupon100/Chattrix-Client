@@ -80,7 +80,7 @@ const AuthProvider = ({ children }) => {
             }
           
         } catch (err) {
-        console.log(err)
+        // console.log(err)
         }
       } else {
         localStorage.removeItem("access-token");
