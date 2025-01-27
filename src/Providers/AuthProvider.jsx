@@ -17,6 +17,7 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [filteredPosts, setFilteredPosts] = useState([]);
+  const [isRefetch, setIsRefetch] = useState(false);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
   const axiosPublic = useAxiosPublic();
@@ -79,7 +80,7 @@ const AuthProvider = ({ children }) => {
             }
           
         } catch (err) {
-        console.log
+        console.log(err)
         }
       } else {
         localStorage.removeItem("access-token");
@@ -103,7 +104,9 @@ const AuthProvider = ({ children }) => {
     filteredPosts, 
     setFilteredPosts,
     deleteUserAccount,
-    userSettoDb
+    userSettoDb,
+    isRefetch, 
+    setIsRefetch
   };
 
   return (

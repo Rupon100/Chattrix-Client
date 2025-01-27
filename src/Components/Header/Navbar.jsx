@@ -54,26 +54,26 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className="navbar-end">
+        <div className="navbar-end bg-transparent">
           {loading ? (
             <div>
               <span className="loading loading-spinner loading-lg"></span>
             </div>
           ) : user?.email ? (
-            <div className="dropdown dropdown-end flex  ">
+            <div className="dropdown dropdown-end flex bg-transparent">
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-ghost btn-circle avatar"
+                className="btn btn-circle avatar bg-transparent "
               >
-                <div className="w-12 rounded-full">
+                <div className="w-12 h-12 rounded-full overflow-hidden">
                   <img alt="profile" src={user?.photoURL } />
                 </div>
               </div>
 
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content rounded-box z-[1] mt-16 w-52 p-2 shadow text-center text-white bg-sky-950 flex flex-col justify-center "
+                className="menu menu-sm dropdown-content rounded-box z-[1] mt-16 w-52 p-2 shadow text-center text-white  flex flex-col justify-center "
               >
                 <li className="text-center font-semibold text-lg">
                   {user?.displayName || 'User'}

@@ -6,19 +6,61 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useQuery } from "@tanstack/react-query";
+import useAuth from "../Hooks/useAuth";
+import { useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 const MyPost = () => {
-  const [posts, isLoading,  isFetched, refetch] = usePosts();
+  const [posts, isLoading, refetch] = usePosts();
   const axiosSecure = useAxiosSecure();
+  const {user,  isRefetch, setIsRefetch} = useAuth();
+  const queryClient = useQueryClient();
 
+
+
+  console.log(posts);
+
+  useEffect(() => {
+    if (isRefetch) {
+      refetch();
+      setIsRefetch(false);
+    }
+  },[isRefetch,  refetch])
+
+
+  // const handleDelete = async (id) => {
+  //   const res = await axiosSecure.delete(`/post/${id}`);
+  //   if (res.data.deletedCount > 0) {
+  //     // refetch();
+  //     setIsRefetch(true);
+  //     return toast.success("Post Deleted!");
+  //   }
+  // };
+
+
+  //for test
   const handleDelete = async (id) => {
     const res = await axiosSecure.delete(`/post/${id}`);
     if (res.data.deletedCount > 0) {
-      refetch();
-      return toast.success("Post Deleted!");
+      // Update React Query cache
+      queryClient.setQueryData(["userposts", user?.email], (oldPosts) =>
+        oldPosts.filter((post) => post._id !== id)
+      );
+      toast.success("Post Deleted!");
     }
   };
 
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
+
+ 
   return (
     <div className="min-h-screen flex flex-col items-center  gap-4 p-4 md:p-10">
       <Helmet>

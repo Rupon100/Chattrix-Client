@@ -5,8 +5,10 @@ import useAuth from '../Hooks/useAuth';
 import useUsers from '../Hooks/useUsers';
 
 const AdminCheckRoute = ({children}) => {
-    const { user, loading } = useContext(AuthContext); 
+    const { user, loading } = useAuth(); 
     const [users, isLoading] = useUsers();
+
+    console.log(users.role)
   
     if (isLoading || loading) {
       return (

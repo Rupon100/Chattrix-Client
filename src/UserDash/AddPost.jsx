@@ -3,17 +3,21 @@ import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
 import useAxiosSecure from "./../Hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 import Select from "react-select";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
+import usePosts from "../Hooks/userPosts";
 
 const AddPost = () => {
-  const { user } = useAuth();
+  const { user, isRefetch, setIsRefetch } = useAuth();
   const [error, setError] = useState("");
   const axiosSecure = useAxiosSecure();
   const [limit, setLimit] = useState(true);
-  const [selectedTags, setSelectedTags] = useState([]);  
+  const [selectedTags, setSelectedTags] = useState([]); 
+  const [posts, isLoading, refetch] = usePosts(); 
+  const queryClient = useQueryClient();
 
   const today = new Date();
   const formattedDate = today.toISOString();
@@ -33,7 +37,6 @@ const AddPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const form = e.target;
     const photoURL = form.photoURL.value.trim();
     const displayName = form.name.value.trim();
@@ -47,7 +50,7 @@ const AddPost = () => {
       !email ||
       !title ||
       !description ||
-      selectedTags.length === 0 // Ensure tags are selected
+      selectedTags.length === 0  
     ) {
       setError("Please fill out all fields.");
       toast.error("Please fill out all fields.");
@@ -69,10 +72,17 @@ const AddPost = () => {
       },
     };
 
+
     const res = await axiosSecure.post("/addpost", data);
 
     if (res.data.insertedId) {
+      queryClient.setQueryData(["userposts", user?.email], (oldPosts) => [
+        data,
+        ...oldPosts,
+      ]);
+
       form.reset();
+      // setIsRefetch(true);
       setSelectedTags([]);  
       toast.success("Posted successfully!");
     } else if (!res?.data?.status) {
@@ -83,6 +93,8 @@ const AddPost = () => {
       setLimit(true);
     }
   };
+
+  
 
   return (
     <div className="min-h-screen">

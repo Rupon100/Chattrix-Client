@@ -6,9 +6,8 @@ const usePosts = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const {
-    data: posts = [],
+    data: posts,
     isLoading,
-    isFetched,
     refetch,
   } = useQuery({
     queryKey: ["userposts", user?.email],
@@ -18,7 +17,8 @@ const usePosts = () => {
       return res.data;
     },
     enabled: !!user?.email,
+    initialData: [],
   });
-  return [posts, isLoading, isFetched, refetch]
+  return [posts, isLoading,  refetch];
 };
 export default usePosts;

@@ -2,13 +2,13 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
-
+import { toast } from 'react-hot-toast';
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient(); 
   const [search, setSearch] = useState("");
  
-  const { data: users = [] } = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ["all-users", search],
     queryFn: async () => {
       const res = await axiosSecure.get(`/all-users?search=${search}`);
@@ -21,8 +21,14 @@ const ManageUsers = () => {
     setSearch(e.target.value);
   }
 
+  //-----role update---
   const handleStatus = async(id) => {
     const res = await axiosSecure.patch(`/user-role/${id}`);
+    console.log(res.data)
+    if(res.data?.modifiedCount > 0){
+      refetch();
+      toast.success("Role Modified!!");
+    }
   }
   
   return (
