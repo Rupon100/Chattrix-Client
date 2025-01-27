@@ -3,8 +3,7 @@ import useAnnouncement from "../../Hooks/useAnnouncement";
 
 const Announcement = () => {
   const [announcements, isLoading] = useAnnouncement();
-  console.log(announcements);
-
+  
   if (isLoading) {
     return (
       <div className="min-h-screen flex justify-center items-center">

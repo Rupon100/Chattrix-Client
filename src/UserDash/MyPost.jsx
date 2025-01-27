@@ -19,8 +19,6 @@ const MyPost = () => {
     }
   };
 
-  console.log("posts length: ", posts.length);
-
   return (
     <div className="min-h-screen flex flex-col items-center  gap-4 p-4 md:p-10">
       <Helmet>

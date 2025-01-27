@@ -21,5 +21,4 @@ const usePosts = () => {
   });
   return [posts, isLoading, isFetched, refetch]
 };
-
 export default usePosts;

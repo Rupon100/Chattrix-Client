@@ -11,7 +11,6 @@ const Navbar = () => {
   const [announcements] = useAnnouncement();
 
   const [users] = useUsers();
-  console.log(users?.role)
 
   const handleLogout = () => {
     logOut();

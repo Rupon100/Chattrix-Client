@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { auth } from "./../Firebase/firebase.config";
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -40,46 +41,48 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  const deleteUserAccount = () => {
+    setLoading(true);
+    return deleteUser(auth.currentUser);
+  }
+
   const updateUserProfile = (name, photo) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
     });
   };
+
+  const userSettoDb = async(userInfo) => {
+    const userData = {
+      name: userInfo?.displayName,
+      email: userInfo?.email,
+      role: "user",
+      badge: 'bronze',
+    };
+    
+    await axiosPublic.post('/user', userData);
+  }
  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
       if (currentUser) {
         const userInfo = { email: currentUser?.email };
-
         try {
             const res = await axiosPublic.post("/jwt", userInfo) 
             if (res.data.token) {
               localStorage.setItem("access-token", res.data.token);
-              console.log(res.data.token);
-
-
-              const userData = {
-                name: currentUser?.displayName,
-                email: currentUser?.email,
-                role: "user",
-                badge: 'bronze',
-              };
-
-              const userSend = await axiosPublic.post('/user', userData);
-              console.log(userSend)
+              
                
               setUser(currentUser);
               setLoading(false);
             }
           
         } catch (err) {
-          console.log(err);
+        console.log
         }
       } else {
-        // todo:  remove token(if stored)
         localStorage.removeItem("access-token");
-
         setUser(currentUser);
         setLoading(false);
       }
@@ -98,7 +101,9 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     googleSignin,
     filteredPosts, 
-    setFilteredPosts
+    setFilteredPosts,
+    deleteUserAccount,
+    userSettoDb
   };
 
   return (

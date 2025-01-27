@@ -117,8 +117,6 @@ const PostDetails = () => {
     }
   }
 
-  console.log(_id);
-
   return (
     <div className="bg-gradient-to-r from-black to-sky-950 min-h-screen p-4 md:p-8">
       <div className="max-w-2xl mx-auto space-y-4 text-white ">

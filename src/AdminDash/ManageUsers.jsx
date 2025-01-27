@@ -8,7 +8,6 @@ const ManageUsers = () => {
   const queryClient = useQueryClient(); 
   const [search, setSearch] = useState("");
  
-
   const { data: users = [] } = useQuery({
     queryKey: ["all-users", search],
     queryFn: async () => {
@@ -16,9 +15,6 @@ const ManageUsers = () => {
       return res.data;
     },
   });
-
- 
-   
   
   const handleSearch = (e) => {
     // search functionality
@@ -27,10 +23,7 @@ const ManageUsers = () => {
 
   const handleStatus = async(id) => {
     const res = await axiosSecure.patch(`/user-role/${id}`);
-    console.log(res.data);
   }
-  
-
   
   return (
     <div className="flex gap-2 md:gap-4 flex-col justify-center items-center p-4 md:p-8">

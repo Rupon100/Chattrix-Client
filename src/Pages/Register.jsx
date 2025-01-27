@@ -9,7 +9,7 @@ const image_hosting_key = import.meta.env.VITE_IMAGE_API;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Register = () => {
-  const { createUser, updateUserProfile, googleSignin } = useAuth();
+  const { createUser, updateUserProfile, googleSignin, userSettoDb, user } = useAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
@@ -20,32 +20,34 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    console.log("Form Data: ", data);
 
+  const onSubmit = async (data) => {
     const img = { image: data.image[0] };
     const res = await axiosPublic.post(image_hosting_api, img, {
       headers: {
         "content-type": "multipart/form-data",
       },
     });
-
     if (res.data.success) {
       const photoURL = res?.data?.data?.display_url;
-
       createUser(data?.email, data?.password).then((res) => {
         updateUserProfile(data?.username, photoURL).then(() => {
           reset();
           toast.success("Register successfull!");
           navigate("/");
         });
-        console.log(res?.user);
+        userSettoDb({displayName: data?.username, email: data?.email});
       });
     }
   };
 
+ 
+ 
+
+
   const handleGoogleLogin = () => {
     googleSignin().then((res) => {
+      userSettoDb({displayName: res?.user?.displayName, email: res?.user?.email})
       toast.success("Register successfull!");
       navigate("/");
     });

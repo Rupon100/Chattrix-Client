@@ -18,7 +18,6 @@ const Joinus = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data.email);
     signUser(data.email, data.password)
       .then((res) => {
         toast.success("Login Successfull!");

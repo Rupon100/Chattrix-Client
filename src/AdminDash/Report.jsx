@@ -1,9 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import Swal from 'sweetalert2';
+import useAuth from "../Hooks/useAuth";
 
 const Report = () => {
   const axiosSecure = useAxiosSecure();
+  const {deleteUserAccount} = useAuth();
+  const {user} = useAuth();
   const { data: reports = [], isLoading, refetch } = useQuery({
     queryKey: ["reports"],
     queryFn: async () => {
@@ -11,18 +15,34 @@ const Report = () => {
       return res.data;
     },
   });
-  console.log(reports);
-
 
   const handleCommentDelete = async(id) => {
-    const res = await axiosSecure.delete(`/comment-delete/${id}`);
-    console.log(res.data.result.deletedCount)
-    if(res.data.result.deletedCount > 0){
-        await refetch();
-        return toast.success("Report Comment is Deleted!");
-    }
-  }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this comment!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.delete(`/comment-delete/${id}`);
+        if(res.data.result.deletedCount > 0){
+          await refetch();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your reported comment has been deleted.",
+            icon: "success"
+          });
+      }
+        
+      }
+    });
+  };
 
+
+ 
 
   return (
     <div className="p-4 md:p-8 flex flex-col items-center min-h-screen">
@@ -44,7 +64,7 @@ const Report = () => {
                 </h2>
                 <h3 className="text-lg">
                   Feedback:{" "}
-                  <span className="font-semibold"> {report?.feedback[0]}</span>
+                  <span className="font-semibold"> {report?.feedback}</span>
                 </h3>
               </div>
               <hr className="" />
@@ -63,7 +83,7 @@ const Report = () => {
                 </h2>
                 <div className="flex justify-center flex-col md:flex-row gap-4" >
                   <button onClick={() => handleCommentDelete(report?.commentId)} className="p-1 border text-sm rounded bg-red-500" >Delete Comment</button>
-                  <button className="p-1 border text-sm rounded bg-red-500" >Delete Commenter Account</button>
+                  {/* <button onClick={handleDeleteAccount} className="p-1 border text-sm rounded bg-red-500" >Delete Commenter Account</button> */}
                 </div>
               </div>
             </div>

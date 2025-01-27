@@ -10,13 +10,9 @@ const useAxiosSecure = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
 
-  // req interceptors to add authorization header for every secure call to the apis
   axiosSecure.interceptors.request.use(
     function (config) {
       const token = localStorage.getItem("access-token");
-      
-      console.log(" req stoped by interceptors", token);
-
       config.headers.authorization = `Bearer ${token}`;
       return config;
     },
@@ -32,11 +28,9 @@ const useAxiosSecure = () => {
     },
     async (err) => {
       const status = err.response.status;
-      console.log('error from, ', err)
       if (status === 401 || status === 403) {
         await logOut();
         navigate("/login");
-        console.log("logging out from axiosSecure*");
       }
       return Promise.reject(err);
     }

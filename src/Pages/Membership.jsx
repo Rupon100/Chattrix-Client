@@ -6,7 +6,6 @@ import CheckoutForm from './../UserDash/checkoutForm';
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY);
 
 const Membership = () => {
-    console.log(stripePromise)
   return (
     <div className="bg-gradient-to-r from-black to-sky-950 min-h-screen text-white p-4 md:p-8 flex flex-col gap-4 items-center">
       <Helmet>

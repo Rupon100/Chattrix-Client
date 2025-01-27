@@ -8,7 +8,7 @@ const AdminCheckRoute = ({children}) => {
     const { user, loading } = useContext(AuthContext); 
     const [users, isLoading] = useUsers();
   
-    if (isLoading) {
+    if (isLoading || loading) {
       return (
         <div className="flex justify-center items-center w-full min-h-screen ">
           <span className="loading loading-spinner loading-lg"></span>

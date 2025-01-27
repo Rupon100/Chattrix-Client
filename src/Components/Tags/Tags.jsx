@@ -27,7 +27,6 @@ const Tags = () => {
     );
   }
 
-  console.log(data)
   return (
     <div className="p-4 md:p-8 space-y-4 text-white " >
       <h2 className="text-2xl md:text-4xl font-semibold">Explore Tags</h2>
