@@ -15,7 +15,7 @@ const Announcement = () => {
   return (
     <div className="p-4 md:p-8 text-white bg-gradient-to-r from-black to-sky-950 min-h-screen flex flex-col items-center gap-4 md:gap-8">
       <Helmet>
-        <title>Chattrix | Announcement</title>
+        <title>Chattrix | Home</title>
       </Helmet>
       <h2 className="text-2xl md:text-4xl font-semibold">Announcement</h2>
       <div className="w-full flex flex-col justify-center gap-4 items-center p-4">
