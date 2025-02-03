@@ -45,9 +45,9 @@ const Joinus = () => {
     <div className=" min-h-screen bg-gradient-to-r from-black to-sky-950 flex justify-center items-center">
       <div className="max-w-sm mx-auto p-10  text-white">
         <h2 className="text-2xl font-bold mb-4 text-center">Join Us</h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-[300px]">
           {/* email */}
-          <div className="form-control mb-4">
+          <div className="form-control mb-4 w-full">
             <label htmlFor="email" className="block text-sm font-semibold">
               Email
             </label>

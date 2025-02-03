@@ -13,7 +13,7 @@ const CheckoutForm = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    fetch("http://localhost:4000/create-payment-intent", {
+    fetch("https://chattrix-beige.vercel.app/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ amount: 12.99, currency: "usd" }),
@@ -76,7 +76,7 @@ const CheckoutForm = () => {
           email: user?.email,  
         };
 
-        await fetch("http://localhost:4000/update-user-role", {
+        await fetch("https://chattrix-beige.vercel.app/update-user-role", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userData),

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const axiosPublic = axios.create({
-    baseURL: 'http://localhost:4000'
+    baseURL: 'https://chattrix-beige.vercel.app'
 })
 
 const useAxiosPublic = () => {

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { MdCardMembership } from "react-icons/md";
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaUserAlt } from "react-icons/fa";
 import { IoNotifications } from "react-icons/io5";
 import useAuth from "../../Hooks/useAuth";
 import useAnnouncement from "../../Hooks/useAnnouncement";
@@ -42,29 +42,33 @@ const Navbar = () => {
   return (
     <div className="bg-sky-950 text-white">
       <div className=" max-w-6xl mx-auto navbar px-4">
+
+        {/* name and logo */}
         <div className="navbar-start">
           <Link to="/" className="text-xl font-bold flex items-center gap-1">
             <h2>Chattrix</h2>
             <img className="max-w-10" src="/talking.png" alt="logo" />
           </Link>
         </div>
+
+        {/* middle links or navbar */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 space-x-2 lg:space-x-4">
             {links}
           </ul>
         </div>
 
-        <div className="navbar-end bg-transparent">
+        <div className="navbar-end space-x-1">
           {loading ? (
-            <div>
-              <span className="loading loading-spinner loading-lg"></span>
+            <div className="p-2 flex justify-center items-center" >
+              <FaUserAlt />
             </div>
           ) : user?.email ? (
-            <div className="dropdown dropdown-end flex bg-transparent">
+            <div className="dropdown dropdown-end flex bg-transparent rounded-full">
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-circle avatar bg-transparent "
+                className="  btn btn-circle avatar bg-transparent"
               >
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <img alt="profile" src={user?.photoURL } />
@@ -73,7 +77,7 @@ const Navbar = () => {
 
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content rounded-box z-[1] mt-16 w-52 p-2 shadow text-center text-white  flex flex-col justify-center "
+                className="menu menu-sm dropdown-content rounded-box z-[1] mt-16 w-52 p-2 shadow text-center text-white  flex flex-col justify-center bg-sky-950"
               >
                 <li className="text-center font-semibold text-lg">
                   {user?.displayName || 'User'}
@@ -95,6 +99,7 @@ const Navbar = () => {
             </Link>
           )}
 
+          {/* dropdown mwnu for small device */}
           <div className="dropdown dropdown-end lg:hidden">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg

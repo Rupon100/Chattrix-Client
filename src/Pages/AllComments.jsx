@@ -166,19 +166,19 @@ const AllComments = () => {
   const { user } = useAuth();
 
   // Pagination state
-  const [currentPage, setCurrentPage] = useState(1); // Track current page
-  const [totalPages, setTotalPages] = useState(1); // Track total pages
+  const [currentPage, setCurrentPage] = useState(1);  
+  const [totalPages, setTotalPages] = useState(1); 
   const limit = 10; // Number of comments per page
 
   const { data, isLoading } = useQuery({
-    queryKey: ["allcomments", currentPage], // Include currentPage to refetch when page changes
+    queryKey: ["allcomments", currentPage], 
     queryFn: async () => {
       const res = await axiosSecure.get(`/allcomments/${id}`, {
         params: { page: currentPage, limit },
       });
       return res.data;
     },
-    keepPreviousData: true, // Keeps previous data while new data is loading
+    keepPreviousData: true, 
   });
 
   const allcomments = data?.comments || [];
@@ -227,7 +227,7 @@ const AllComments = () => {
   const end = Math.min(currentPage * limit, data?.totalComments);
 
   return (
-    <div className="min-h-screen text-white bg-gradient-to-r from-black to-sky-950 flex justify-center items-center">
+    <div className="min-h-screen text-white bg-gradient-to-r from-black to-sky-950 flex justify-center items-center p-4 md:p-8">
       <div className="overflow-x-auto max-w-2xl mx-auto">
         {allcomments.length === 0 ? (
           <p className="text-center text-white text-xl font-semibold">
@@ -264,12 +264,10 @@ const AllComments = () => {
                         onChange={(e) => handleChange(e, comment._id)}
                         className="select select-bordered w-full max-w-xs bg-transparent border border-gray-600"
                       >
-                        <option disabled selected>
-                          Feedback
-                        </option>
-                        <option value="bully">Bully</option>
-                        <option value="scammer">Scammer</option>
-                        <option value="spam">Spam</option>
+                        <option className="bg-gray-700" disabled selected>Feedback</option>
+                        <option className="bg-gray-700" value="bully">Bully</option>
+                        <option className="bg-gray-700" value="scammer">Scammer</option>
+                        <option className="bg-gray-700" value="spam">Spam</option>
                       </select>
                     </td>
                     <td>

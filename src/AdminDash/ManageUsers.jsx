@@ -268,7 +268,7 @@ const ManageUsers = () => {
                   </td>
                   <td>
                     <button
-                      className={`btn btn-sm text-white hover:bg-gray-50/10 ${
+                      className={`btn btn-sm text-white bg-gray-50/10 hover:bg-gray-50/10 ${
                         user.badge === "gold"
                           ? "bg-gray-50/10"
                           : "bg-transparent"
