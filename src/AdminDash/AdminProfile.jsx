@@ -81,18 +81,18 @@ const AdminProfile = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
+    <div className="min-h-screen flex justify-center items-center my-4">
       <div className="p-4 md:p-8 flex flex-col gap-4 justify-center items-center ">
         <div className="text-center flex flex-col justify-center items-center gap-4">
+          <h2 className="text-2xl md:text-4xl font-semibold">
+            {user?.displayName}
+          </h2>
           <small className="text-lg font-semibold">{user?.email}</small>
           <img
             className="w-28 h-28 object-cover"
             src={user?.photoURL}
             alt="user photo"
           />
-          <h2 className="text-2xl md:text-4xl font-semibold">
-            {user?.displayName}
-          </h2>
         </div>
         <div className="flex justify-between items-center">
           <div className="p-3 m-2 text-xl font-semibold border bg-[#0088FE]">

@@ -64,7 +64,7 @@ const Dashboard = () => {
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow text-black gap-2 font-semibold"
+              className="dropdown-content menu rounded-box z-[1] w-52 p-4 shadow gap-2 font-semibold bg-sky-950 text-white"
             >
               <Link
                 to={`/dashboard/profile`}

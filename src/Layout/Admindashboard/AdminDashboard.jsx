@@ -93,7 +93,6 @@ const AdminDashboard = () => {
           </div>
         </nav>
         <Outlet>
-
         </Outlet>
       </div>
     </div>

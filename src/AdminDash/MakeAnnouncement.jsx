@@ -21,6 +21,11 @@ const MakeAnnouncement = () => {
             description,
             date: new Date()
         };
+
+        if(!title || !description){
+          return toast.error("please write a annoucement to submit!");
+        }
+
         const res = await axiosSecure.post('/announcement', announcement);
         if(res.data?.insertedId){
             return toast.success("announcement successfully added!!");
@@ -29,10 +34,11 @@ const MakeAnnouncement = () => {
     }
 
   return (
-    <div className="flex flex-col justify-center items-center  p-4 md:p-8">
+    <div className="min-h-screen flex flex-col justify-center items-center  p-4 md:p-8">
       <Helmet>
         <title>Admin | Announcement</title>
       </Helmet>
+      <div className="w-full" >
       <div className="text-center">
         <h2 className="text-2xl md:text-4xl">Make Announcement</h2>
       </div>
@@ -90,6 +96,7 @@ const MakeAnnouncement = () => {
             <button className="btn bg-transparent text-white hover:bg-gray-50/10">Add Announcement</button>
           </div>
         </form>
+      </div>
       </div>
     </div>
   );
