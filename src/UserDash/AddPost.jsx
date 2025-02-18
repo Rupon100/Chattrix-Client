@@ -76,11 +76,6 @@ const AddPost = () => {
     const res = await axiosSecure.post("/addpost", data);
 
     if (res.data.insertedId) {
-      // queryClient.setQueryData(["userposts", user?.email], (oldPosts) => [
-      //   data,
-      //   ...oldPosts,
-      // ]);
-
       queryClient.setQueryData(["userposts", user?.email], (oldPosts = []) => {
         if (!Array.isArray(oldPosts)) {
           oldPosts = [];  
@@ -104,12 +99,17 @@ const AddPost = () => {
   
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen mt-6  justify-center items-center">
       <Helmet>
         <title>Chattrix | Add Post</title>
       </Helmet>
+      <div className="" >
+
+     
       {limit ? (
-        <div className="text-white min-h-screen">
+        <div className="text-white min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-black to-sky-950">
+          <h2 className="text-2xl md:text-4xl">Write a post</h2>
+          <div className="w-full" >
           <form
             onSubmit={handleSubmit}
             className="card-body text-white max-w-xl mx-auto"
@@ -208,6 +208,7 @@ const AddPost = () => {
               </button>
             </div>
           </form>
+          </div>
         </div>
       ) : (
         <div className="flex justify-center items-center min-h-screen flex-col gap-4">
@@ -223,6 +224,7 @@ const AddPost = () => {
           </Link>
         </div>
       )}
+       </div>
     </div>
   );
 };

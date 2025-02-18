@@ -223,7 +223,7 @@ const MyPost = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center gap-4 p-4 md:p-10">
+    <div className="min-h-screen flex flex-col justify-center items-center gap-4 p-4 md:p-10 mt-6 bg-gradient-to-r from-black to-sky-950">
       <Helmet>
         <title>Dashboard | My Post</title>
       </Helmet>
