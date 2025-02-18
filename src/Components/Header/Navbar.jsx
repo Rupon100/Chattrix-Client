@@ -5,12 +5,28 @@ import { IoNotifications } from "react-icons/io5";
 import useAuth from "../../Hooks/useAuth";
 import useAnnouncement from "../../Hooks/useAnnouncement";
 import useUsers from "../../Hooks/useUsers";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const { user, loading, logOut } = useAuth();
   const [announcements] = useAnnouncement();
-
+  const [isScrolled, setIsScrolled] = useState(false);
   const [users] = useUsers();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if(window.scrollY > 40){
+        setIsScrolled(true);
+      }else{
+        setIsScrolled(false);
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+
+  }, []);
 
   const handleLogout = () => {
     logOut();
@@ -40,7 +56,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="bg-sky-950 text-white">
+    <div className={`text-white sticky top-0 left-0 right-0 z-50 ${isScrolled ? 'bg-sky-950/40 backdrop-blur-3xl shadow-md transition-all duration-75' : 'bg-sky-950'}`}>
       <div className=" max-w-6xl mx-auto navbar px-4">
 
         {/* name and logo */}
