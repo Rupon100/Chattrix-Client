@@ -27,7 +27,7 @@ const MyProfile = () => {
             {user?.displayName}
           </h2>
           <h3 className="text-xl font-semibold">{user?.email}</h3>
-          <div className="relative">
+          <div className="">
             <div className="flex flex-col items-center">
               <img
                 className="w-28 h-28 rounded-lg object-cover"
@@ -35,7 +35,7 @@ const MyProfile = () => {
                 alt=""
               />
             </div>
-            <div className="flex items-center flex-col font-bold  absolute -right-[55px] -bottom-6">
+            <div className="flex items-center flex-col font-bold my-4">
               {users?.badge === "bronze" && (
                 <div>
                   <img
