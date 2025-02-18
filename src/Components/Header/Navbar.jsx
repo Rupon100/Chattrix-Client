@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { MdCardMembership } from "react-icons/md";
 import { FaHome, FaUserAlt } from "react-icons/fa";
 import { IoNotifications } from "react-icons/io5";
@@ -15,17 +15,18 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if(window.scrollY > 40){
+      if(window.scrollY > 50){
         setIsScrolled(true);
       }else{
         setIsScrolled(false);
       }
     }
 
+    // Add event listener when component mounts
     window.addEventListener("scroll", handleScroll);
 
+    // Cleanup: Remove event listener when component unmounts
     return () => window.removeEventListener("scroll", handleScroll);
-
   }, []);
 
   const handleLogout = () => {
@@ -47,10 +48,10 @@ const Navbar = () => {
         </Link>
       </li>
       <li>
-        <Link to={`/`} className="nav ">
+        <div  className="bg-transparent border ">
           <IoNotifications />
-          <div className={`badge bg-gray-500 text-white ${announcements.length > 0 && 'bg-red-600'}`}>+{announcements?.length}</div>
-        </Link>
+          <div className={`badge text-white ${announcements.length > 0 && 'bg-red-600'}`}>+{announcements?.length}</div>
+        </div>
       </li>
     </>
   );
@@ -84,7 +85,7 @@ const Navbar = () => {
               <div
                 tabIndex={0}
                 role="button"
-                className="  btn btn-circle avatar bg-transparent"
+                className="btn btn-circle avatar bg-transparent"
               >
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <img alt="profile" src={user?.photoURL } />
@@ -93,7 +94,7 @@ const Navbar = () => {
 
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content rounded-box z-[1] mt-16 w-52 p-2 shadow text-center text-white  flex flex-col justify-center bg-sky-950"
+                className="menu menu-sm dropdown-content rounded-box z-[1] mt-16 w-52 p-2 text-center text-white  flex flex-col justify-center bg-sky-950 shadow"
               >
                 <li className="text-center font-semibold text-lg">
                   {user?.displayName || 'User'}
@@ -117,7 +118,7 @@ const Navbar = () => {
 
           {/* dropdown mwnu for small device */}
           <div className="dropdown dropdown-end lg:hidden">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div tabIndex={0} role="button" className=" btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"

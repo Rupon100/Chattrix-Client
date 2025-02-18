@@ -7,23 +7,20 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const AllPosts = () => {
-  const [posts, refetch, isLoading] = useAllPost();  
-  const { filteredPosts } = useContext(AuthContext);  
-  const [currentPage, setCurrentPage] = useState(1);  
-  const [allPosts, setAllPosts] = useState([]);  
+  const [posts, refetch, isLoading] = useAllPost();
+  const { filteredPosts } = useContext(AuthContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [allPosts, setAllPosts] = useState([]);
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    // if (!isLoading) {
-    //   setAllPosts(posts);  
-    // }
     if (!isLoading && posts.length > 0) {
       setAllPosts(posts);
     }
   }, [posts, isLoading]);
 
   useEffect(() => {
-    setCurrentPage(1); 
+    setCurrentPage(1);
   }, [filteredPosts]);
 
   const postPerPage = 5;
@@ -42,11 +39,11 @@ const AllPosts = () => {
     if (currentPage > 1) setCurrentPage((prev) => prev - 1);
   };
 
-    const handleSort = async () => {
+  const handleSort = async () => {
     const res = await axiosSecure.get("/sortposts");
     setAllPosts(res.data);
     setCurrentPage(1);
-  }
+  };
 
   if (isLoading) {
     return (
@@ -58,7 +55,6 @@ const AllPosts = () => {
 
   return (
     <div className="p-4 md:p-8 text-white space-y-4">
-
       <div className="flex justify-between">
         <div className="font-semibold text-xl">All Post</div>
         <button onClick={handleSort} className="btn btn-sm">

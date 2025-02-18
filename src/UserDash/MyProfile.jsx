@@ -17,32 +17,55 @@ const MyProfile = () => {
     .slice(0, 3);
 
   return (
-    <div className="p-4 md:p-8 flex flex-col justify-center gap-4 items-center">
+    <div className="p-4 md:p-8 flex flex-col justify-center gap-4 items-center min-h-screen bg-gradient-to-r from-black to-sky-950 mt-6">
       <Helmet>
         <title>Dashboard | Profile</title>
       </Helmet>
+      <div className="flex flex-col justify-center items-center" >
       <div className="text-center flex flex-col items-center gap-2 md:gap-4 space-y-3">
+        <h2 className="text-2xl leading-tight font-semibold">
+          {user?.displayName}
+        </h2>
         <h3 className="text-xl font-semibold">{user?.email}</h3>
-        <div className="flex flex-col items-center" >
-          <img className="w-28 h-28 rounded-lg object-cover" src={user?.photoURL} alt="" />
-          <h2 className="text-2xl font-semibold">{user?.displayName}</h2>
-        </div>
-        <div className="flex items-center flex-col font-bold">
-          {users?.badge === "bronze" && (
-            <div>
-              <img className="w-12 h-12 object-cover" src={bronzeImg} alt="Bronze Badge" />
-              Bronze
-            </div>
-          )}
-          {users?.badge === "gold" && (
-            <div>
-              <img className="object-cover" src={goldImg} alt="Gold Badge" />
-              Gold
-            </div>
-          )}
+        <div className="relative" >
+          <div className="flex flex-col items-center">
+            <img
+              className="w-28 h-28 rounded-lg object-cover"
+              src={user?.photoURL}
+              alt=""
+            />
+          </div>
+          <div className="flex items-center flex-col font-bold  absolute -right-[55px] -bottom-6">
+            {users?.badge === "bronze" && (
+              <div>
+                <img
+                  className="w-12 h-12 object-cover"
+                  src={bronzeImg}
+                  alt="Bronze Badge"
+                />
+                <p>
+
+                Bronze
+                </p>
+              </div>
+            )}
+            {users?.badge === "gold" && (
+              <div className="flex items-center" >
+                <img 
+                className="w-12 h-12 object-cover" 
+                src={goldImg} 
+                alt="Gold Badge" 
+                />
+                <p>
+
+                Gold
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-      <div className="text-white grid gap-4 grid-cols-1 md:grid-cols-3">
+      <div className="text-white grid gap-4 mt-8 grid-cols-1 md:grid-cols-3">
         {recentPosts.map((post) => (
           <div
             key={post._id}
@@ -68,6 +91,7 @@ const MyProfile = () => {
             <small>{new Date(post.date).toLocaleString()}</small>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );
