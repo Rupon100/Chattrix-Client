@@ -99,7 +99,7 @@ const AddPost = () => {
   
 
   return (
-    <div className="min-h-screen mt-6  justify-center items-center">
+    <div className="min-h-screen mt-6  justify-center items-center dark:text-black">
       <Helmet>
         <title>Chattrix | Add Post</title>
       </Helmet>
@@ -107,7 +107,7 @@ const AddPost = () => {
 
      
       {limit ? (
-        <div className="text-white min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-black to-sky-950">
+        <div className="text-white min-h-screen flex flex-col justify-center items-center dark:text-black">
           <h2 className="text-2xl md:text-4xl">Write a post</h2>
           <div className="w-full" >
           <form
@@ -117,7 +117,7 @@ const AddPost = () => {
             {/* Author Image */}
             <div className="form-control ">
               <label className="label">
-                <span className="label-text text-white">Author Image</span>
+                <span className="label-text text-white dark:text-black">Author Image</span>
               </label>
               <input
                 type="text"
@@ -132,7 +132,7 @@ const AddPost = () => {
             {/* Author Name */}
             <div className="form-control ">
               <label className="label">
-                <span className="label-text text-white">Author Name</span>
+                <span className="label-text text-white dark:text-black">Author Name</span>
               </label>
               <input
                 type="text"
@@ -147,7 +147,7 @@ const AddPost = () => {
             {/* Author Email */}
             <div className="form-control ">
               <label className="label">
-                <span className="label-text text-white">Author Email</span>
+                <span className="label-text text-white dark:text-black">Author Email</span>
               </label>
               <input
                 type="text"
@@ -162,7 +162,7 @@ const AddPost = () => {
             {/* Title */}
             <div className="form-control ">
               <label className="label">
-                <span className="label-text text-white">Title</span>
+                <span className="label-text text-white dark:text-black">Title</span>
               </label>
               <input
                 type="text"
@@ -176,7 +176,7 @@ const AddPost = () => {
             {/* Description */}
             <div className="form-control ">
               <label className="label">
-                <span className="label-text text-white">Description</span>
+                <span className="label-text text-white dark:text-black">Description</span>
               </label>
               <textarea
                 name="description"
@@ -189,7 +189,7 @@ const AddPost = () => {
             {/* Tags */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text text-white">Tags</span>
+                <span className="label-text text-white dark:text-black">Tags</span>
               </label>
               <Select
                 isMulti
@@ -203,7 +203,7 @@ const AddPost = () => {
             </div>
 
             <div className="form-control mt-6">
-              <button className="btn bg-sky-800 border-none text-white hover:bg-sky-900">
+              <button className="btn bg-sky-800 border-none text-white hover:bg-sky-900 dark:bg-sky-50 dark:text-black">
                 Add
               </button>
             </div>

@@ -13,7 +13,7 @@ const Announcement = () => {
   }
 
   return (
-    <div className="p-4 md:p-8 text-white bg-gradient-to-r from-black to-sky-950 min-h-screen flex flex-col items-center gap-4 md:gap-8">
+    <div className="p-4 md:p-8 text-white bg-gradient-to-r from-black to-sky-950 dark:bg-sky-100 dark:bg-none dark:text-black min-h-screen flex flex-col items-center gap-4 md:gap-8">
       <Helmet>
         <title>Chattrix | Home</title>
       </Helmet>
@@ -21,7 +21,7 @@ const Announcement = () => {
       <div className="w-full flex flex-col justify-center gap-4 items-center p-4">
         {announcements.map((announcement, i) => (
           <div key={i}  className="w-full">
-            <div className="max-w-2xl bg-gray-50/10 mx-auto p-2 rounded-lg border border-gray-300">
+            <div className="max-w-2xl bg-gray-50/10 dark:bg-sky-50 mx-auto p-2 rounded-lg border border-gray-300">
             <div className="space-y-2" >
               <small>Date: {announcement.date}</small>
               <div className="flex items-center gap-2" >

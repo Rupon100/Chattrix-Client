@@ -223,7 +223,7 @@ const MyPost = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center gap-4 p-4 md:p-10 mt-6 bg-gradient-to-r from-black to-sky-950">
+    <div className="min-h-screen flex flex-col justify-center items-center gap-4 p-4 md:p-10 mt-6 dark:text-black">
       <Helmet>
         <title>Dashboard | My Post</title>
       </Helmet>
@@ -239,9 +239,9 @@ const MyPost = () => {
           <div className="overflow-x-auto max-w-2xl mx-auto">
             <table className="table">
               <thead>
-                <tr className="text-white">
+                <tr className="text-white dark:text-black">
                   <th></th>
-                  <th>Title</th>
+                  <th >Title</th>
                   <th>Vote</th>
                   <th></th>
                   <th></th>

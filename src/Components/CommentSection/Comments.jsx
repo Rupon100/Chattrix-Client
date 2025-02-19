@@ -13,7 +13,7 @@ const Comments = ({ comments, loading }) => {
   return (
   <div>
     {comments.map(comment => (
-        <div key={comment._id} className="bg-gray-50/10 rounded p-2 m-2 text-gray-400" >
+        <div key={comment._id} className="bg-gray-50/10 dark:bg-sky-50 dark:text-black rounded p-2 m-2 text-gray-400" >
             <div>
                 <div className="flex items-center gap-2" >
                 <img className="w-10 h-10 object-cover rounded" src={comment?.userImg} alt="" />

@@ -7,10 +7,8 @@ import useUsers from "../../Hooks/useUsers";
 
 const Home = () => {
   const [announcements, isLoading] = useAnnouncement();
-  // const announcements = [];
-
   return (
-    <div className="bg-gradient-to-r from-black to-sky-950">
+    <div className="bg-gradient-to-r from-black to-sky-950 dark:bg-sky-100 dark:bg-none dark:text-black">
       <Banner></Banner>
       <div className="max-w-6xl mx-auto">
         <AllPosts></AllPosts>

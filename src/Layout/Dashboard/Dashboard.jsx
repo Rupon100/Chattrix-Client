@@ -5,7 +5,7 @@ import useAuth from "../../Hooks/useAuth";
 const Dashboard = () => {
   const { user } = useAuth();
   return (
-    <div className="bg-gradient-to-r from-black to-sky-950 text-white min-h-screen p-4 md:p-8">
+    <div className="bg-gradient-to-r from-black to-sky-950 text-white dark:bg-sky-100 dark:bg-none dark:text-black min-h-screen p-4 md:p-8">
       <div className=" max-w-6xl mx-auto">
         {/* user dashboard here all user content will be here */}
         <nav className="flex items-center justify-between">
@@ -13,7 +13,7 @@ const Dashboard = () => {
             <img className="w-12 h-12 object-cover rounded-full " src={user?.photoURL} alt="" />
             <Link
               to={`/`}
-              className="border px-4 py-1 rounded font-semibold flex items-center gap-2"
+              className="border px-4 py-1 rounded font-semibold flex items-center gap-2 dark:bg-sky-50"
             >
               {" "}
               <FaLongArrowAltLeft /> <span>Home</span>
@@ -26,19 +26,19 @@ const Dashboard = () => {
             >
               <Link
                 to={`/dashboard/profile`}
-                className="border px-4 py-1 rounded"
+                className="border px-4 py-1 rounded dark:bg-sky-50"
               >
                 My Profile
               </Link>
               <Link
                 to={`/dashboard/addpost`}
-                className="border px-4 py-1 rounded"
+                className="border px-4 py-1 rounded dark:bg-sky-50"
               >
                 Add Post
               </Link>
               <Link
                 to={`/dashboard/mypost`}
-                className="border px-4 py-1 rounded"
+                className="border px-4 py-1 rounded dark:bg-sky-50"
               >
                 My Posts
               </Link>

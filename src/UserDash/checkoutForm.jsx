@@ -91,7 +91,7 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4  rounded shadow">
+    <div className="max-w-md mx-auto p-4 rounded shadow">
       <h2 className="text-xl font-bold mb-4">Checkout</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <CardElement

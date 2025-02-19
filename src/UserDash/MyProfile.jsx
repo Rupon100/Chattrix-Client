@@ -17,7 +17,7 @@ const MyProfile = () => {
     .slice(0, 3);
 
   return (
-    <div className="p-4 md:p-8 flex flex-col justify-center gap-4 items-center min-h-screen bg-gradient-to-r from-black to-sky-950 mt-6">
+    <div className="p-4 md:p-8 flex flex-col justify-center gap-4 items-center min-h-screen dark:text-black mt-6">
       <Helmet>
         <title>Dashboard | Profile</title>
       </Helmet>
@@ -59,7 +59,7 @@ const MyProfile = () => {
             </div>
           </div>
         </div>
-        <div className="text-white grid gap-4 mt-8 grid-cols-1 md:grid-cols-3">
+        <div className="text-white dark:text-black grid gap-4 mt-8 grid-cols-1 md:grid-cols-3">
           {recentPosts.map((post) => (
             <div
               key={post._id}

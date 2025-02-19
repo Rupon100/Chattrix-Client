@@ -29,7 +29,7 @@ const SinglePost = ({ post }) => {
   })
 
   return (
-    <Link to={`/details/${_id}`} className="border border-gray-50 rounded flex gap-4 flex-col p-2 justify-center h-full">
+    <Link to={`/details/${_id}`} className="border border-gray-50 dark:border-sky-200 rounded flex gap-4 flex-col p-2 justify-center h-full dark:bg-sky-50">
       <div className="flex flex-col gap-2">
         <div className="flex-shrink-0">
           <div className="flex items-center gap-2">

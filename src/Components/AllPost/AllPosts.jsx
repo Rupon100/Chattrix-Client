@@ -54,10 +54,10 @@ const AllPosts = () => {
   }
 
   return (
-    <div className="p-4 md:p-8 text-white space-y-4">
+    <div className="p-4 md:p-8 text-white space-y-4 dark:text-black">
       <div className="flex justify-between">
         <div className="font-semibold text-xl">All Post</div>
-        <button onClick={handleSort} className="btn btn-sm">
+        <button onClick={handleSort} className="btn btn-sm dark:bg-sky-950 dark:text-white">
           Sort by Popularity
         </button>
       </div>
