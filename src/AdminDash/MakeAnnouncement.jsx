@@ -89,7 +89,6 @@ const MakeAnnouncement = () => {
               name="description"
               placeholder="description"
               className="input input-bordered text-black p-4 resize-none "
-             
             />
           </div>
           <div className="form-control mt-6">
