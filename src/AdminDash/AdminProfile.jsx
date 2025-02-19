@@ -129,15 +129,7 @@ const AdminProfile = () => {
             </PieChart>
           </ResponsiveContainer>
         </div>
-
-        {/* <div className="h-[400px] w-full border text-white " >
-          <ResponsiveContainer width="100%" height={400}className={`text-white`}>
-            <BarChart data={data} className="text-white" >
-              <Bar dataKey="uv" fill="#294973" />
-            </BarChart>
-          </ResponsiveContainer>
-        </div> */}
-
+ 
         <div className="divider bg-gray-600 h-[1px]"></div>
         <div className="p-2 flex flex-col justify-center gap-1 items-center">
           <h2 className="text-xl md:text-2xl font-semibold">Add Tags</h2>
@@ -150,7 +142,7 @@ const AdminProfile = () => {
             />
             <button
               onClick={handleTags}
-              className="px-4 py-2 rounded-lg border hover:bg-gray-50/10"
+              className="px-4 py-2 rounded-lg border hover:bg-gray-50/10 dark:bg-sky-50"
             >
               Add
             </button>

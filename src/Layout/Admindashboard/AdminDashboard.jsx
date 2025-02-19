@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet-async";
 const AdminDashboard = () => {
     const { user } = useAuth();
   return (
-    <div className="bg-gradient-to-r from-black to-sky-950 text-white min-h-screen p-4 md:p-8">
+    <div className="bg-gradient-to-r from-black to-sky-950 text-white min-h-screen dark:bg-sky-100 dark:bg-none dark:text-black p-4 md:p-8">
       <Helmet>
         <title>Dashboard | Admin</title>
       </Helmet>
@@ -16,7 +16,7 @@ const AdminDashboard = () => {
             <img className="w-12 h-12 object-cover rounded-full " src={user?.photoURL} alt="" />
             <Link
               to={`/`}
-              className="border px-4 py-1 rounded font-semibold flex items-center gap-2"
+              className="border px-4 py-1 rounded font-semibold flex items-center gap-2 dark:bg-white"
             >
               {" "}
               <FaLongArrowAltLeft /> <span>Home</span>
@@ -26,20 +26,20 @@ const AdminDashboard = () => {
           <ul className="space-x-2 hidden lg:flex ml-auto">
             <Link
               to={`/admin-dashboard/admin-profile`}
-              className="border px-4 py-1 rounded"
+              className="border px-4 py-1 rounded dark:bg-white"
             >
               Admin Profile
             </Link>
             <Link
               to={`/admin-dashboard/manage-users`}
-              className="border px-4 py-1 rounded"
+              className="border px-4 py-1 rounded dark:bg-white"
             >
               Manage Users
             </Link>
-            <Link to={`/admin-dashboard/report`} className="border px-4 py-1 rounded">
+            <Link to={`/admin-dashboard/report`} className="border px-4 py-1 rounded dark:bg-white">
               Report Activities
             </Link>
-            <Link to={`/admin-dashboard/admin-announcement`} className="border px-4 py-1 rounded">
+            <Link to={`/admin-dashboard/admin-announcement`} className="border px-4 py-1 rounded dark:bg-white">
               Make Announcement
             </Link>
           </ul>

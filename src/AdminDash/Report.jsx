@@ -56,7 +56,7 @@ const Report = () => {
           {reports.map((report) => (
             <div
               key={report._id}
-              className="p-2 border w-full border-gray-500 rounded-lg space-y-3 bg-gray-50/10"
+              className="p-2 border w-full border-gray-500 rounded-lg space-y-3 bg-gray-50/10 dark:bg-sky-50 dark:text-black"
             >
               <div>
                 <h2 className="font-semibold text-xl">
@@ -74,7 +74,7 @@ const Report = () => {
                 </h4>
                 <p>
                   Comment:{" "}
-                  <span className="text-gray-300">{report?.commenterMsg}</span>
+                  <span className="text-gray-300 dark:text-black">{report?.commenterMsg}</span>
                 </p>
               </div>
               <div>

@@ -240,7 +240,7 @@ const ManageUsers = () => {
         <div className="overflow-x-auto w-full max-w-2xl mx-auto">
           <table className="table">
             <thead>
-              <tr className="text-white">
+              <tr className="text-white dark:text-black">
                 <th>#</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -257,7 +257,7 @@ const ManageUsers = () => {
                   <td>
                     <button
                       onClick={() => handleStatus(user._id)}
-                      className={`btn btn-sm text-white hover:bg-gray-50/10 ${
+                      className={`btn btn-sm text-white hover:bg-gray-50/10 dark:text-black ${
                         user.role === "admin"
                           ? "bg-gray-50/10"
                           : "bg-transparent"
@@ -268,7 +268,7 @@ const ManageUsers = () => {
                   </td>
                   <td>
                     <button
-                      className={`btn btn-sm text-white bg-gray-50/10 hover:bg-gray-50/10 ${
+                      className={`btn btn-sm text-white bg-gray-50/10 hover:bg-gray-50/10 dark:text-black ${
                         user.badge === "gold"
                           ? "bg-gray-50/10"
                           : "bg-transparent"
@@ -292,7 +292,7 @@ const ManageUsers = () => {
       {totalPages > 1 && (
         <div className="flex justify-between items-center w-full mt-4 max-w-2xl mx-auto ">
           {/* Left Side: Showing range of displayed data */}
-          <div className="text-white">
+          <div className="text-white dark:text-black">
             Showing {Math.min((page - 1) * 10 + 1, data?.totalUsers || 0)} to{" "}
             {Math.min(page * 10, data?.totalUsers || 0)} of{" "}
             {data?.totalUsers || 0}

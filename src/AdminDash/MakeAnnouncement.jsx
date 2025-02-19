@@ -46,7 +46,7 @@ const MakeAnnouncement = () => {
         <form onSubmit={handleAnnouncement} className="card-body max-w-xl mx-auto">
           <div className="form-control">
             <label className="label ">
-              <span className="label-text text-white">Author Image</span>
+              <span className="label-text text-white dark:text-black">Author Image</span>
             </label>
             <input
               type="url"
@@ -58,7 +58,7 @@ const MakeAnnouncement = () => {
           </div>
           <div className="form-control">
             <label className="label ">
-              <span className="label-text text-white">Author Name</span>
+              <span className="label-text text-white dark:text-black">Author Name</span>
             </label>
             <input
               type="text"
@@ -70,7 +70,7 @@ const MakeAnnouncement = () => {
           </div>
           <div className="form-control">
             <label className="label ">
-              <span className="label-text text-white">Title</span>
+              <span className="label-text text-white dark:text-black">Title</span>
             </label>
             <input
               type="text"
@@ -82,7 +82,7 @@ const MakeAnnouncement = () => {
           </div>
           <div className="form-control">
             <label className="label ">
-              <span className="label-text text-white">Description</span>
+              <span className="label-text text-white dark:text-black">Description</span>
             </label>
             <textarea
               type="text"
@@ -93,7 +93,7 @@ const MakeAnnouncement = () => {
             />
           </div>
           <div className="form-control mt-6">
-            <button className="btn bg-transparent text-white hover:bg-gray-50/10">Add Announcement</button>
+            <button className="btn bg-transparent text-white hover:bg-gray-50/10 dark:text-black dark:bg-white">Add Announcement</button>
           </div>
         </form>
       </div>
