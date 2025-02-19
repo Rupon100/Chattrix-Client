@@ -42,8 +42,8 @@ const Joinus = () => {
   };
 
   return (
-    <div className=" min-h-screen bg-gradient-to-r from-black to-sky-950 flex justify-center items-center">
-      <div className="max-w-sm mx-auto p-10  text-white">
+    <div className=" min-h-screen bg-gradient-to-r from-black to-sky-950 dark:bg-sky-100 dark:bg-none dark:text-black flex justify-center items-center">
+      <div className="max-w-sm mx-auto p-10  text-white dark:text-black">
         <h2 className="text-2xl font-bold mb-4 text-center">Join Us</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-[300px]">
           {/* email */}
@@ -97,7 +97,7 @@ const Joinus = () => {
           <div className="w-full mt-6">
             <button
               type={"submit"}
-              className="w-full p-2 rounded-lg bg-sky-800 hover:bg-sky-900 text-white"
+              className="w-full p-2 rounded-lg bg-sky-800 hover:bg-sky-900 dark:bg-sky-50 dark:text-black text-white"
             >
               Login
             </button>
@@ -114,7 +114,7 @@ const Joinus = () => {
           <button
             onClick={handleGoogleLogin}
             type="button"
-            className="flex items-center gap-2 border self-center p-2 rounded-lg hover:bg-gray-200 hover:text-black transition-all"
+            className="flex justify-center items-center gap-2 border self-center p-2 rounded-lg hover:bg-gray-200 hover:text-black w-full  transition-all dark:bg-sky-50"
           >
             <FcGoogle /> <h3>Join With Google</h3>{" "}
           </button>

@@ -41,10 +41,6 @@ const Register = () => {
     }
   };
 
- 
- 
-
-
   const handleGoogleLogin = () => {
     googleSignin().then((res) => {
       userSettoDb({displayName: res?.user?.displayName, email: res?.user?.email})
@@ -54,8 +50,8 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-black to-sky-950 min-h-screen flex justify-center items-center">
-      <div className="max-w-sm mx-auto p-10 text-white  rounded-md">
+    <div className="bg-gradient-to-r from-black to-sky-950 min-h-screen dark:bg-sky-100 dark:bg-none dark:text-black flex justify-center items-center">
+      <div className="max-w-sm mx-auto p-10 text-white dark:text-black rounded-md">
         <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
 
         <form
@@ -64,7 +60,7 @@ const Register = () => {
         >
           {/* usernaem */}
           <div className="mb-4">
-            <label htmlFor="username" className="block text-sm  text-white font-semibold">
+            <label htmlFor="username" className="block text-sm  text-white font-semibold dark:text-black">
               Username
             </label>
             <input
@@ -83,7 +79,7 @@ const Register = () => {
 
           {/* Email */}
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm  text-white font-semibold">
+            <label htmlFor="email" className="block text-sm  text-white dark:text-black font-semibold">
               Email
             </label>
             <input
@@ -108,7 +104,7 @@ const Register = () => {
 
           {/* choose an image */}
           <div className="mb-4">
-            <label htmlFor="image" className="block text-sm  text-white font-semibold">
+            <label htmlFor="image" className="block text-sm dark:text-black text-white font-semibold">
               photoURL
             </label>
             <input
@@ -129,7 +125,7 @@ const Register = () => {
 
           {/* Password */}
           <div className="mb-4">
-            <label htmlFor="password" className="block text-sm text-white font-semibold">
+            <label htmlFor="password" className="block text-sm text-white dark:text-black font-semibold">
               Password
             </label>
             <input
@@ -162,7 +158,7 @@ const Register = () => {
           <div className="mb-4">
             <button
               type="submit"
-              className="w-full p-2  bg-sky-800 hover:bg-sky-900 text-white rounded-md"
+              className="w-full p-2  bg-sky-800 hover:bg-sky-900 text-white dark:bg-sky-50 dark:text-black rounded-md"
             >
               Register
             </button>
@@ -173,7 +169,7 @@ const Register = () => {
           <button
             onClick={handleGoogleLogin}
             type="button"
-            className="flex items-center gap-2 border self-center p-2 rounded-lg hover:bg-gray-200  hover:text-black text-white  transition-all"
+            className="flex justify-center items-center gap-2 border self-center p-2 rounded-lg hover:bg-gray-200  hover:text-black text-whited dark:bg-sky-50 dark:text-black w-full  transition-all"
           >
             <FcGoogle /> <h3>Join With Google</h3>{" "}
           </button>

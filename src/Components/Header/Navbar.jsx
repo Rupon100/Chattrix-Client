@@ -185,7 +185,7 @@ const Navbar = () => {
           ) : (
             <Link
               to={`/login`}
-              className="flex border rounded-lg items-center gap-2 px-4 py-2  bg-transparent text-white hover:bg-sky-700 no-underline"
+              className="flex border rounded-lg items-center gap-2 px-4 py-2  bg-transparent text-white hover:bg-sky-700 no-underline dark:bg-sky-50 dark:text-black"
             >
               Join Us
             </Link>
